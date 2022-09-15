@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ewout\\OneDrive - Windesheim Office365\\HBO-ICT jaar 2\\Programeren in C#\\VS projects\\RaceSim\\Model\\Model.csproj": {}
+    "C:\\Users\\ewout\\OneDrive - Windesheim Office365\\HBO-ICT jaar 2\\Programeren in C#\\VS projects\\RaceSim\\ControllerTest\\ControllerTest.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ewout\\OneDrive - Windesheim Office365\\HBO-ICT jaar 2\\Programeren in C#\\VS projects\\RaceSim\\Model\\Model.csproj": {
+    "C:\\Users\\ewout\\OneDrive - Windesheim Office365\\HBO-ICT jaar 2\\Programeren in C#\\VS projects\\RaceSim\\ControllerTest\\ControllerTest.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ewout\\OneDrive - Windesheim Office365\\HBO-ICT jaar 2\\Programeren in C#\\VS projects\\RaceSim\\Model\\Model.csproj",
-        "projectName": "Model",
-        "projectPath": "C:\\Users\\ewout\\OneDrive - Windesheim Office365\\HBO-ICT jaar 2\\Programeren in C#\\VS projects\\RaceSim\\Model\\Model.csproj",
+        "projectUniqueName": "C:\\Users\\ewout\\OneDrive - Windesheim Office365\\HBO-ICT jaar 2\\Programeren in C#\\VS projects\\RaceSim\\ControllerTest\\ControllerTest.csproj",
+        "projectName": "ControllerTest",
+        "projectPath": "C:\\Users\\ewout\\OneDrive - Windesheim Office365\\HBO-ICT jaar 2\\Programeren in C#\\VS projects\\RaceSim\\ControllerTest\\ControllerTest.csproj",
         "packagesPath": "C:\\Users\\ewout\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ewout\\OneDrive - Windesheim Office365\\HBO-ICT jaar 2\\Programeren in C#\\VS projects\\RaceSim\\Model\\obj\\",
+        "outputPath": "C:\\Users\\ewout\\OneDrive - Windesheim Office365\\HBO-ICT jaar 2\\Programeren in C#\\VS projects\\RaceSim\\ControllerTest\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
@@ -44,6 +44,28 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.NET.Test.Sdk": {
+              "target": "Package",
+              "version": "[17.1.0, )"
+            },
+            "NUnit": {
+              "target": "Package",
+              "version": "[3.13.3, )"
+            },
+            "NUnit.Analyzers": {
+              "target": "Package",
+              "version": "[3.3.0, )"
+            },
+            "NUnit3TestAdapter": {
+              "target": "Package",
+              "version": "[4.2.1, )"
+            },
+            "coverlet.collector": {
+              "target": "Package",
+              "version": "[3.1.2, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
