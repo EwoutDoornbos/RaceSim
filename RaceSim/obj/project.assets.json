@@ -43,26 +43,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\ewout\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\dank meme master 69\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ewout\\OneDrive - Windesheim Office365\\HBO-ICT jaar 2\\Programeren in C#\\VS projects\\RaceSim\\RaceSim\\RaceSim.csproj",
+      "projectUniqueName": "C:\\Users\\dank meme master 69\\IdeaProjects\\RaceSim\\RaceSim\\RaceSim.csproj",
       "projectName": "RaceSim",
-      "projectPath": "C:\\Users\\ewout\\OneDrive - Windesheim Office365\\HBO-ICT jaar 2\\Programeren in C#\\VS projects\\RaceSim\\RaceSim\\RaceSim.csproj",
-      "packagesPath": "C:\\Users\\ewout\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ewout\\OneDrive - Windesheim Office365\\HBO-ICT jaar 2\\Programeren in C#\\VS projects\\RaceSim\\RaceSim\\obj\\",
+      "projectPath": "C:\\Users\\dank meme master 69\\IdeaProjects\\RaceSim\\RaceSim\\RaceSim.csproj",
+      "packagesPath": "C:\\Users\\dank meme master 69\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\dank meme master 69\\IdeaProjects\\RaceSim\\RaceSim\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
-        "C:\\Users\\ewout\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\dank meme master 69\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -76,11 +69,11 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\ewout\\OneDrive - Windesheim Office365\\HBO-ICT jaar 2\\Programeren in C#\\VS projects\\RaceSim\\Controller\\Controller.csproj": {
-              "projectPath": "C:\\Users\\ewout\\OneDrive - Windesheim Office365\\HBO-ICT jaar 2\\Programeren in C#\\VS projects\\RaceSim\\Controller\\Controller.csproj"
+            "C:\\Users\\dank meme master 69\\IdeaProjects\\RaceSim\\Controller\\Controller.csproj": {
+              "projectPath": "C:\\Users\\dank meme master 69\\IdeaProjects\\RaceSim\\Controller\\Controller.csproj"
             },
-            "C:\\Users\\ewout\\OneDrive - Windesheim Office365\\HBO-ICT jaar 2\\Programeren in C#\\VS projects\\RaceSim\\Model\\Model.csproj": {
-              "projectPath": "C:\\Users\\ewout\\OneDrive - Windesheim Office365\\HBO-ICT jaar 2\\Programeren in C#\\VS projects\\RaceSim\\Model\\Model.csproj"
+            "C:\\Users\\dank meme master 69\\IdeaProjects\\RaceSim\\Model\\Model.csproj": {
+              "projectPath": "C:\\Users\\dank meme master 69\\IdeaProjects\\RaceSim\\Model\\Model.csproj"
             }
           }
         }
