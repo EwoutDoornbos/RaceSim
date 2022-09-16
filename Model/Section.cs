@@ -9,6 +9,11 @@ namespace Model
     internal class Section
     {
         public SectionTypes Sectiontype;
+
+        public Section(SectionTypes sectiontype)
+        {
+            Sectiontype = sectiontype;
+        }
     }
     enum SectionTypes 
     { 
