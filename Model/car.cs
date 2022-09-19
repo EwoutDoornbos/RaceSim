@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Model
 {
-    internal class car : IEquipment
+    public class car : IEquipment
     {
         public int Quality { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public int Performance { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }

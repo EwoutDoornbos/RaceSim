@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace Model
 {
-    internal class Competition
+    public class Competition
     {
-        public List<IParticipant> Participants;
+        public List<IParticipant> Participants { get; set; }
         public Queue<Track> Tracks;
-        public NextTrack(Track track) 
+        public Track NextTrack() 
         {
-            Tracks = track;
+            return Tracks.Dequeue();
         }
     }
 }
