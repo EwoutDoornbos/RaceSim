@@ -1,2 +1,17 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World! ya salty dog cunt!");
+﻿using System;
+using Controller;
+
+namespace RaceSim // Note: actual namespace depends on the project name.
+{
+    class Program 
+    {
+        static void Main(string[] args)
+        {
+            Data.Initialize();
+            Data.NextRace();
+            System.Console.WriteLine(Data.CurrentRace.Track.Name);
+
+            for (; ; ) { Thread.Sleep(1000); }
+        }
+    }
+}

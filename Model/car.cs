@@ -8,17 +8,17 @@ namespace Model
 {
     public class car : IEquipment
     {
-        public int Quality { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public int Performance { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public int Speed { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public bool isBroken { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public int Quality { get; set; }
+        public int Performance { get; set; }
+        public int Speed { get; set; }
+        public bool isBroken { get; set; }
 
-        public car (int quality, int performance, int speed, bool isBroken)
+        public car ()
         {
-            Quality = quality;
-            Performance = performance;
-            Speed = speed;
-            this.isBroken = isBroken;
+            Quality = 10;
+            Performance = 10;
+            Speed = 0;
+            this.isBroken = false;
         }
     }
 }

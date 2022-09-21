@@ -15,7 +15,7 @@ namespace Model
             Sectiontype = sectiontype;
         }
     }
-    enum SectionTypes 
+    public enum SectionTypes 
     { 
         Straight,
         LeftCorner,

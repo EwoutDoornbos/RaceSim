@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ControllerTest
+namespace Controller
 {
     public class Race
     {
@@ -36,7 +36,11 @@ namespace ControllerTest
         }
         public void RandomizeEquipment()
         {
-
+            foreach (var participant in Participants)
+            {
+                participant.Equipement.Quality = _random.Next();
+                participant.Equipement.Performance = _random.Next();
+            }
         }
     }
 }

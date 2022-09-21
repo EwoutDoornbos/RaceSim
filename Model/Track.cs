@@ -10,9 +10,9 @@ namespace Model
     {
         public String Name { get; set; }
         public LinkedList<Section> Sections;
-        public Track()
+        public Track(String name)
         {
-
+            Name = name;
         }
     }
 }

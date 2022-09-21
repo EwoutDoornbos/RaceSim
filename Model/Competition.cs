@@ -8,11 +8,25 @@ namespace Model
 {
     public class Competition
     {
-        public List<IParticipant> Participants { get; set; }
+        public List<IParticipant> Participants;
         public Queue<Track> Tracks;
+
+ 
+        public Competition()
+        {
+            Participants = new List<IParticipant>();
+            Tracks = new Queue<Track>();
+        }
         public Track NextTrack() 
         {
-            return Tracks.Dequeue();
+            try
+            {
+                return Tracks.Dequeue();
+            }
+            catch (System.NullReferenceException)
+            {
+                return null;
+            }
         }
     }
 }

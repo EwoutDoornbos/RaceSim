@@ -8,14 +8,18 @@ namespace Model
 {
     public class Driver : IParticipant
     {
-        public Driver()
+        public Driver(string name, int points, IEquipment equipement, TeamColors teamColor)
         {
+            Name = name;
+            Points = points;
+            Equipement = equipement;
+            TeamColor = teamColor;
         }
 
-        public string Name { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public int Points { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public IEquipment Equipement { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public TeamColors TeamColor { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string Name { get; set; }
+        public int Points { get; set; }
+        public IEquipment Equipement { get; set; }
+        public TeamColors TeamColor { get; set; }
 
 
     }
