@@ -23,7 +23,7 @@ namespace Model
             {
                 return Tracks.Dequeue();
             }
-            catch (System.NullReferenceException)
+            catch (System.InvalidOperationException)
             {
                 return null;
             }
