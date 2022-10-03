@@ -9,7 +9,9 @@ namespace RaceSim // Note: actual namespace depends on the project name.
         {
             Data.Initialize();
             Data.NextRace();
-            System.Console.WriteLine(Data.CurrentRace.Track.Name);
+            //system.console.writeline(data.currentrace.track.name);
+
+            visualization.DrawTrack(Data.CurrentRace.Track);
 
             for (; ; ) { Thread.Sleep(1000); }
         }
