@@ -15,28 +15,30 @@ namespace RaceSim
         private static int CurserPosY;
 
         private static Compas compas;
+        //this property is just for changing the cursor pos after section has been drawn
+        private static Direction DirGoing;
 
         #region graphics 
 
-        public static string[] _startHorizontal = { "----", " #  ", "  # ", "----" };
-        public static string[] _startVertical = { "-  -", "-# -", "- #-", "-  -" };
+        public static string[] _startHorizontal = { "-----", " #   ", "     ", "   # ", "-----" };
+        public static string[] _startVertical = { "|   |", "|#  |", "|   |", "|  #|", "|   |" };
 
-        private static string[] _finishHorizontal = { "----", "▄▀▄▀", "▄▀▄▀", "----" };
-        private static string[] _finishVertical = { "-▀▄-", "-▀▄-", "-▀▄-", "-▀▄-" };
+        private static string[] _finishHorizontal = { "-----", "▀▄▀▄▀", "▀▄▀▄▀", "▀▄▀▄▀", "-----" };
+        private static string[] _finishVertical = { "|▀▄▀|", "|▀▄▀|", "|▀▄▀|", "|▀▄▀|", "|▀▄▀|" };
 
-        public static string[] _straightHorizontal = { "----", "    ", "    ", "----" };
-        public static string[] _straightVertical = { "-  -", "-  -", "-  -", "-  -" };
+        public static string[] _straightHorizontal = { "-----", "     ", "     ", "     ", "-----" };
+        public static string[] _straightVertical = { "|   |", "|   |", "|   |", "|   |", "|   |" };
 
         //The direction (N, E, S, W) means the direction the track was facing before the corner. So a cornerLeftN wil end up with a track facing West
-        public static string[] _cornerLeftN = { "----", "  --", "   -", "-  -" };
-        public static string[] _cornerLeftE = { "-  -", "   -", "  --", "----" };
-        public static string[] _cornerLeftS = { "-  -", "-   ", "--  ", "----" };
-        public static string[] _cornerLeftW = { "----", "--  ", "-   ", "-  -" };
+        public static string[] _cornerLeftN = { "-----", "   \\|", "    |", "    |", "*   |" };
+        public static string[] _cornerLeftE = { "*   |", "    |", "    |", "   /|", "-----" };
+        public static string[] _cornerLeftS = { "|   *", "|    ", "|    ", "|\\   ", "-----" };
+        public static string[] _cornerLeftW = { "-----", "|/   ", "|    ", "|    ", "|   *" };
 
-        public static string[] _cornerRightN = { "----", "--  ", "-   ", "-  -" };
-        public static string[] _cornerRightE = { "-  -", "-   ", "--  ", "----" };
-        public static string[] _cornerRightS = { "-  -", "   -", "  --", "----" };
-        public static string[] _cornerRightW = { "----", "  --", "   -", "-  -" };
+        public static string[] _cornerRightN = { "-----", "|/   ", "|    ", "|    ", "|   *" };
+        public static string[] _cornerRightE = { "-----", "   \\|", "    |", "    |", "*   |" };
+        public static string[] _cornerRightS = { "*   |", "    |", "    |", "   /|", "-----" };
+        public static string[] _cornerRightW = { "|   *", "|    ", "|    ", "|\\   ", "-----" };
 
         #endregion
         public static void Initialize()
@@ -45,15 +47,20 @@ namespace RaceSim
         }
         public static void DrawTrack(Track track)
         {
-            compas = Compas.S;
-            CurserPosY = 5;
-            CurserPosY = 5;
+            compas = Compas.E;
+            DirGoing = Direction.Straight;
+            CurserPosX = 24;
+            CurserPosY = 16;
+            Console.BackgroundColor = ConsoleColor.DarkGray;
+            Console.ForegroundColor = ConsoleColor.Black;
+            Console.SetCursorPosition(CurserPosX, CurserPosY);
 
             foreach (Section section in track.Sections)
             {
 
                 DrawSection(section.Sectiontype);
             }
+            Console.SetCursorPosition(1, 1);
         }
         public static void DrawSection(SectionTypes sectionType)
         {
@@ -69,18 +76,18 @@ namespace RaceSim
                     return SectionTypeToDirectionalSectionType(_straightVertical, _straightHorizontal, _straightVertical, _straightHorizontal);
                 case SectionTypes.LeftCorner:
                     string[] tempL = SectionTypeToDirectionalSectionType(_cornerLeftN, _cornerLeftE, _cornerLeftS, _cornerLeftW);
-                    ChangeDirection(Direction.Left); ChangeCurserPosCorner(Direction.Left);
+                     DirGoing = Direction.Left; 
                     return tempL;
                 case SectionTypes.RightCorner:
                     string[] tempR = SectionTypeToDirectionalSectionType(_cornerRightN, _cornerRightE, _cornerRightS, _cornerRightW);
-                    ChangeDirection(Direction.Right); ChangeCurserPosCorner(Direction.Right);
+                    DirGoing = Direction.Right; 
                     return tempR;
                 case SectionTypes.StartGrid:
-                    return SectionTypeToDirectionalSectionType(_startVertical, _startHorizontal, _startHorizontal, _startVertical);
+                    return SectionTypeToDirectionalSectionType(_startVertical, _startHorizontal, _startVertical, _startHorizontal);
                 case SectionTypes.Finish:
-                    return SectionTypeToDirectionalSectionType(_finishVertical, _finishHorizontal, _finishHorizontal, _finishVertical);
+                    return SectionTypeToDirectionalSectionType(_finishVertical, _finishHorizontal, _finishVertical, _finishHorizontal );
                 default:
-                    return new string[0]; 
+                    throw new ArgumentOutOfRangeException(nameof(sectionType), sectionType, null);
             }
         }
         public static string[] SectionTypeToDirectionalSectionType(string[] sectionN, string[] sectionE, string[] sectionS, string[] sectionW)
@@ -96,20 +103,21 @@ namespace RaceSim
                 case Compas.W:
                     return sectionW;
                 default:
-                    return new string[4];
+                    throw new ArgumentOutOfRangeException(nameof(compas), compas, null);
             };
         }
         public static void ConsoleWriteSection(string[] section)
         {
             int tempY = CurserPosY;
+            Console.SetCursorPosition(CurserPosX, CurserPosY);
             foreach (string s in section)
             {
                 Console.Write(s);
-                Console.SetCursorPosition(CurserPosX, tempY);
                 tempY++;
+                Console.SetCursorPosition(CurserPosX, tempY);
+
             }
-            try { Console.SetCursorPosition(CurserPosX, CurserPosY); }
-            catch (ArgumentOutOfRangeException) { Console.WriteLine("Curser set out of bounds thrown"); }
+            Console.SetCursorPosition(CurserPosX, CurserPosY);
         }
         public static void ChangeDirection(Direction direction)
         {
@@ -143,63 +151,79 @@ namespace RaceSim
                     }
                     break;
             }
+
         }
         public static void ChangeCurserPos()
         {
-            switch (compas)
+            if (DirGoing != Direction.Straight)
             {
-                case Compas.N:
-                    CurserPosX -= 4;
-                    break;
-                case Compas.E:
-                    CurserPosY += 4;
-                    break;
-                case Compas.S:
-                    CurserPosX += 4;
-                    break;
-                case Compas.W:
-                    CurserPosY -= 4;
-                    break;
+                ChangeCurserPosCorner(DirGoing);
+                ChangeDirection(DirGoing);
+                DirGoing = Direction.Straight;
+            }
+            else
+            {
+                switch (compas)
+                {
+                    case Compas.N:
+                        CurserPosY -= _straightHorizontal.Length;
+                        break;
+                    case Compas.E:
+                        CurserPosX += _straightHorizontal.Length;
+                        break;
+                    case Compas.S:
+                        CurserPosY += _straightHorizontal.Length;
+                        break;
+                    case Compas.W:
+                        CurserPosX -= _straightHorizontal.Length;
+                        break;
 
+                }
             }
+
         }
-        public static void ChangeCurserPosCorner(Direction direction)
+        public static void ChangeCurserPosCorner(Direction dirGoing)
         {
-            switch (direction)
-            {
-                case Direction.Left:
-                    switch (compas)
-                    {
-                        case Compas.N:
-                            CurserPosY += 4; break;
-                        case Compas.E:
-                            CurserPosX -= 4; break;
-                        case Compas.S:
-                            CurserPosY -= 4; break;
-                        case Compas.W:
-                            CurserPosX += 4; break;
-                    }
-                    break;
-                case Direction.Right:
-                    switch (compas)
-                    {
-                        case Compas.N:
-                            CurserPosY -= 4; break;
-                        case Compas.E:
-                            CurserPosX += 4; break;
-                        case Compas.S:
-                            CurserPosY += 4; break;
-                        case Compas.W:
-                            CurserPosX -= 4; break;
-                    }
-                    break;
-            }
+
+                switch (dirGoing)
+                {
+                    case Direction.Left:
+                        switch (compas)
+                        {
+                            case Compas.N:
+                                CurserPosX -= _straightHorizontal.Length; break;
+                            case Compas.E:
+                                CurserPosY -= _straightHorizontal.Length; break;
+                            case Compas.S:
+                                CurserPosX += _straightHorizontal.Length; break;
+                            case Compas.W:
+                                CurserPosY += _straightHorizontal.Length; break;
+                        }
+                        break;
+                    case Direction.Right:
+                        switch (compas)
+                        {
+                            case Compas.N:
+                                CurserPosX += _straightHorizontal.Length; break;
+                            case Compas.E:
+                                CurserPosY += _straightHorizontal.Length; break;
+                            case Compas.S:
+                                CurserPosX -= _straightHorizontal.Length; break;
+                            case Compas.W:
+                                CurserPosY -= _straightHorizontal.Length; break;
+                        }
+                        break;
+                    case Direction.Straight:
+                        break;
+                }
+           
+            
         }
     }
 
     public enum Direction
     {
-        Left,   Right
+        Left,   Right, Straight
     }
     public enum Compas
     {
