@@ -13,3 +13,18 @@ C:\Users\dank meme master 69\IdeaProjects\RaceSim\Controller\obj\Debug\net6.0\Co
 C:\Users\dank meme master 69\IdeaProjects\RaceSim\Controller\obj\Debug\net6.0\refint\Controller.dll
 C:\Users\dank meme master 69\IdeaProjects\RaceSim\Controller\obj\Debug\net6.0\Controller.pdb
 C:\Users\dank meme master 69\IdeaProjects\RaceSim\Controller\obj\Debug\net6.0\ref\Controller.dll
+C:\Users\ewout\IdeaProjects\RaceSim\Controller\bin\Debug\net6.0\Controller.deps.json
+C:\Users\ewout\IdeaProjects\RaceSim\Controller\bin\Debug\net6.0\Controller.dll
+C:\Users\ewout\IdeaProjects\RaceSim\Controller\bin\Debug\net6.0\Controller.pdb
+C:\Users\ewout\IdeaProjects\RaceSim\Controller\bin\Debug\net6.0\Model.dll
+C:\Users\ewout\IdeaProjects\RaceSim\Controller\bin\Debug\net6.0\Model.pdb
+C:\Users\ewout\IdeaProjects\RaceSim\Controller\obj\Debug\net6.0\Controller.csproj.AssemblyReference.cache
+C:\Users\ewout\IdeaProjects\RaceSim\Controller\obj\Debug\net6.0\Controller.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ewout\IdeaProjects\RaceSim\Controller\obj\Debug\net6.0\Controller.AssemblyInfoInputs.cache
+C:\Users\ewout\IdeaProjects\RaceSim\Controller\obj\Debug\net6.0\Controller.AssemblyInfo.cs
+C:\Users\ewout\IdeaProjects\RaceSim\Controller\obj\Debug\net6.0\Controller.csproj.CoreCompileInputs.cache
+C:\Users\ewout\IdeaProjects\RaceSim\Controller\obj\Debug\net6.0\Controller.csproj.CopyComplete
+C:\Users\ewout\IdeaProjects\RaceSim\Controller\obj\Debug\net6.0\Controller.dll
+C:\Users\ewout\IdeaProjects\RaceSim\Controller\obj\Debug\net6.0\refint\Controller.dll
+C:\Users\ewout\IdeaProjects\RaceSim\Controller\obj\Debug\net6.0\Controller.pdb
+C:\Users\ewout\IdeaProjects\RaceSim\Controller\obj\Debug\net6.0\ref\Controller.dll

@@ -33,3 +33,23 @@ C:\Users\dank meme master 69\IdeaProjects\RaceSim\RaceSim\bin\Debug\net6.0\Model
 C:\Users\dank meme master 69\IdeaProjects\RaceSim\RaceSim\obj\Debug\net6.0\RaceSim.csproj.CopyComplete
 C:\Users\dank meme master 69\IdeaProjects\RaceSim\RaceSim\obj\Debug\net6.0\RaceSim.genruntimeconfig.cache
 C:\Users\dank meme master 69\IdeaProjects\RaceSim\RaceSim\obj\Debug\net6.0\ref\RaceSim.dll
+C:\Users\ewout\IdeaProjects\RaceSim\RaceSim\bin\Debug\net6.0\RaceSim.exe
+C:\Users\ewout\IdeaProjects\RaceSim\RaceSim\bin\Debug\net6.0\RaceSim.deps.json
+C:\Users\ewout\IdeaProjects\RaceSim\RaceSim\bin\Debug\net6.0\RaceSim.runtimeconfig.json
+C:\Users\ewout\IdeaProjects\RaceSim\RaceSim\bin\Debug\net6.0\RaceSim.dll
+C:\Users\ewout\IdeaProjects\RaceSim\RaceSim\bin\Debug\net6.0\RaceSim.pdb
+C:\Users\ewout\IdeaProjects\RaceSim\RaceSim\bin\Debug\net6.0\Controller.dll
+C:\Users\ewout\IdeaProjects\RaceSim\RaceSim\bin\Debug\net6.0\Model.dll
+C:\Users\ewout\IdeaProjects\RaceSim\RaceSim\bin\Debug\net6.0\Controller.pdb
+C:\Users\ewout\IdeaProjects\RaceSim\RaceSim\bin\Debug\net6.0\Model.pdb
+C:\Users\ewout\IdeaProjects\RaceSim\RaceSim\obj\Debug\net6.0\RaceSim.csproj.AssemblyReference.cache
+C:\Users\ewout\IdeaProjects\RaceSim\RaceSim\obj\Debug\net6.0\RaceSim.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ewout\IdeaProjects\RaceSim\RaceSim\obj\Debug\net6.0\RaceSim.AssemblyInfoInputs.cache
+C:\Users\ewout\IdeaProjects\RaceSim\RaceSim\obj\Debug\net6.0\RaceSim.AssemblyInfo.cs
+C:\Users\ewout\IdeaProjects\RaceSim\RaceSim\obj\Debug\net6.0\RaceSim.csproj.CoreCompileInputs.cache
+C:\Users\ewout\IdeaProjects\RaceSim\RaceSim\obj\Debug\net6.0\RaceSim.csproj.CopyComplete
+C:\Users\ewout\IdeaProjects\RaceSim\RaceSim\obj\Debug\net6.0\RaceSim.dll
+C:\Users\ewout\IdeaProjects\RaceSim\RaceSim\obj\Debug\net6.0\refint\RaceSim.dll
+C:\Users\ewout\IdeaProjects\RaceSim\RaceSim\obj\Debug\net6.0\RaceSim.pdb
+C:\Users\ewout\IdeaProjects\RaceSim\RaceSim\obj\Debug\net6.0\RaceSim.genruntimeconfig.cache
+C:\Users\ewout\IdeaProjects\RaceSim\RaceSim\obj\Debug\net6.0\ref\RaceSim.dll

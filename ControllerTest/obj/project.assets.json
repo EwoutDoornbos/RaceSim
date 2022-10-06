@@ -3971,19 +3971,26 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\dank meme master 69\\.nuget\\packages\\": {}
+    "C:\\Users\\ewout\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\dank meme master 69\\IdeaProjects\\RaceSim\\ControllerTest\\ControllerTest.csproj",
+      "projectUniqueName": "C:\\Users\\ewout\\IdeaProjects\\RaceSim\\ControllerTest\\ControllerTest.csproj",
       "projectName": "ControllerTest",
-      "projectPath": "C:\\Users\\dank meme master 69\\IdeaProjects\\RaceSim\\ControllerTest\\ControllerTest.csproj",
-      "packagesPath": "C:\\Users\\dank meme master 69\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\dank meme master 69\\IdeaProjects\\RaceSim\\ControllerTest\\obj\\",
+      "projectPath": "C:\\Users\\ewout\\IdeaProjects\\RaceSim\\ControllerTest\\ControllerTest.csproj",
+      "packagesPath": "C:\\Users\\ewout\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\ewout\\IdeaProjects\\RaceSim\\ControllerTest\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+      ],
       "configFilePaths": [
-        "C:\\Users\\dank meme master 69\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\ewout\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -3997,8 +4004,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\dank meme master 69\\IdeaProjects\\RaceSim\\Controller\\Controller.csproj": {
-              "projectPath": "C:\\Users\\dank meme master 69\\IdeaProjects\\RaceSim\\Controller\\Controller.csproj"
+            "C:\\Users\\ewout\\IdeaProjects\\RaceSim\\Controller\\Controller.csproj": {
+              "projectPath": "C:\\Users\\ewout\\IdeaProjects\\RaceSim\\Controller\\Controller.csproj"
             }
           }
         }
