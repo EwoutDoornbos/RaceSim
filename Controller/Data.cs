@@ -31,8 +31,8 @@ namespace Controller
             competition.Tracks.Enqueue(new Track("Monaco", new[]
             {
                 SectionTypes.StartGrid,
-                SectionTypes.Straight,
-                SectionTypes.Straight,
+                SectionTypes.StartGrid,
+                SectionTypes.StartGrid,
                 SectionTypes.RightCorner,
                 SectionTypes.Straight,
                 SectionTypes.Straight,
@@ -54,20 +54,24 @@ namespace Controller
             competition.Tracks.Enqueue(new Track("Zandvoord", new[]
             {
                 SectionTypes.StartGrid,
-                SectionTypes.Straight,
-                SectionTypes.LeftCorner,
-                SectionTypes.Straight,
-                SectionTypes.Straight,
-                SectionTypes.Straight,
-                SectionTypes.LeftCorner,
+                SectionTypes.StartGrid,
+                SectionTypes.StartGrid,
+                SectionTypes.RightCorner,
                 SectionTypes.Straight,
                 SectionTypes.Straight,
                 SectionTypes.Straight,
-                SectionTypes.LeftCorner,
+                SectionTypes.RightCorner,
                 SectionTypes.Straight,
                 SectionTypes.Straight,
                 SectionTypes.Straight,
-                SectionTypes.LeftCorner,
+                SectionTypes.Straight,
+                SectionTypes.Straight,
+                SectionTypes.RightCorner,
+                SectionTypes.Straight,
+                SectionTypes.Straight,
+                SectionTypes.Straight,
+                SectionTypes.RightCorner,
+                SectionTypes.Straight,
                 SectionTypes.Finish
             }));
         }

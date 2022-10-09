@@ -33,6 +33,7 @@ namespace Controller
             Track = track;
             Participants = participants;
             _random = new Random(DateTime.Now.Millisecond);
+            InitializeParticipantsStartPositions();
         }
         public void RandomizeEquipment()
         {
@@ -41,6 +42,41 @@ namespace Controller
                 participant.Equipement.Quality = _random.Next();
                 participant.Equipement.Performance = _random.Next();
             }
+        }
+        public void InitializeParticipantsStartPositions()
+        {
+            _positions = new Dictionary<Section, SectionData>();
+            Stack<Section> StartGridSections = GetStartSections();
+            int i = 0;
+            int ParticipantsToPlace = Participants.Count;
+
+            while(StartGridSections.Count > 0)
+            {
+                var section = StartGridSections.Pop();
+                SectionData sectionData = GetSectionData(section);
+
+                if(ParticipantsToPlace-i > 1)
+                {
+                sectionData.Left = Participants[i]; i++;
+                sectionData.Right = Participants[i]; i++;
+                }
+                else if(ParticipantsToPlace - i == 1)
+                {
+                    sectionData.Left = Participants[i]; i++;
+                }
+            }
+        }
+        private Stack<Section> GetStartSections()
+        {
+            var sections = new Stack<Section>();
+            foreach(Section S in Track.Sections)
+            {
+                if(S.Sectiontype == SectionTypes.StartGrid)
+                {
+                    sections.Push(S);
+                }
+            }
+            return sections;
         }
     }
 }
