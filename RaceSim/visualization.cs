@@ -1,4 +1,5 @@
 ﻿using Model;
+using Controller;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,58 +15,56 @@ namespace RaceSim
         private static int CurserPosX;
         private static int CurserPosY;
 
+        private static Race CurrentRace;
+
         private static Compas compas;
-        //this property is just for changing the cursor pos after section has been drawn
         private static Direction DirGoing;
 
         #region graphics 
 
-        public static string[] _startHorizontal = { "-----", " #   ", "     ", "   # ", "-----" };
-        public static string[] _startVertical = { "|   |", "|#  |", "|   |", "|  #|", "|   |" };
+        public static string[] _startHorizontal = { "-----", " # 1 ", "     ", " 2 # ", "-----" };
+        public static string[] _startVertical = { "|   |", "|# 1|", "|   |", "|2 #|", "|   |" };
 
         private static string[] _finishHorizontal = { "-----", "▀▄▀▄▀", "▀▄▀▄▀", "▀▄▀▄▀", "-----" };
         private static string[] _finishVertical = { "|▀▄▀|", "|▀▄▀|", "|▀▄▀|", "|▀▄▀|", "|▀▄▀|" };
 
-        public static string[] _straightHorizontal = { "-----", "     ", "     ", "     ", "-----" };
-        public static string[] _straightVertical = { "|   |", "|   |", "|   |", "|   |", "|   |" };
+        public static string[] _straightHorizontal = { "-----", "   1 ", "     ", "   2 ", "-----" };
+        public static string[] _straightVertical = { "|   |", "|  1|", "|   |", "|2  |", "|   |" };
 
         //The direction (N, E, S, W) means the direction the track was facing before the corner. So a cornerLeftN wil end up with a track facing West
-        public static string[] _cornerLeftN = { "-----", "   \\|", "    |", "    |", "*   |" };
-        public static string[] _cornerLeftE = { "*   |", "    |", "    |", "   /|", "-----" };
-        public static string[] _cornerLeftS = { "|   *", "|    ", "|    ", "|\\   ", "-----" };
-        public static string[] _cornerLeftW = { "-----", "|/   ", "|    ", "|    ", "|   *" };
+        public static string[] _cornerLeftN = { "-----", "   \\|", "  1 |", " 2  |", "*   |" };
+        public static string[] _cornerLeftE = { "*   |", " 1  |", "  2 |", "   /|", "-----" };
+        public static string[] _cornerLeftS = { "|   *", "|  1 ", "| 2  ", "|\\   ", "-----" };
+        public static string[] _cornerLeftW = { "-----", "|/   ", "| 2  ", "|  1 ", "|   *" };
 
-        public static string[] _cornerRightN = { "-----", "|/   ", "|    ", "|    ", "|   *" };
-        public static string[] _cornerRightE = { "-----", "   \\|", "    |", "    |", "*   |" };
-        public static string[] _cornerRightS = { "*   |", "    |", "    |", "   /|", "-----" };
-        public static string[] _cornerRightW = { "|   *", "|    ", "|    ", "|\\   ", "-----" };
+        public static string[] _cornerRightN = { "-----", "|/   ", "| 2  ", "|  1 ", "|   *" };
+        public static string[] _cornerRightE = { "-----", "   \\|", "   1|", " 2  |", "*   |" };
+        public static string[] _cornerRightS = { "*   |", " 1  |", "   2|", "   /|", "-----" };
+        public static string[] _cornerRightW = { "|   *", "|  1 ", "| 2  ", "|\\   ", "-----" };
 
         #endregion
-        public static void Initialize()
+        public static void Initialize(Race race)
         {
-
+            CurrentRace = race;
+            compas = Compas.E;
+            DirGoing = Direction.Straight;
         }
         public static void DrawTrack(Track track)
         {
-            compas = Compas.E;
-            DirGoing = Direction.Straight;
             CurserPosX = 24;
             CurserPosY = 16;
-            Console.BackgroundColor = ConsoleColor.DarkGray;
-            Console.ForegroundColor = ConsoleColor.Black;
             Console.SetCursorPosition(CurserPosX, CurserPosY);
 
             foreach (Section section in track.Sections)
             {
-
-                DrawSection(section.Sectiontype);
+                
+                DrawSection(section );
             }
             Console.SetCursorPosition(1, 1);
         }
-        public static void DrawSection(SectionTypes sectionType)
+        public static void DrawSection(Section section)
         {
-
-            ConsoleWriteSection(SectionTypeToStringArray(sectionType));
+            ConsoleWriteSection(SectionTypeToStringArray(section.Sectiontype), section);
             ChangeCurserPos();
         }
         public static string[] SectionTypeToStringArray(SectionTypes sectionType)
@@ -106,18 +105,23 @@ namespace RaceSim
                     throw new ArgumentOutOfRangeException(nameof(compas), compas, null);
             };
         }
-        public static void ConsoleWriteSection(string[] section)
+        public static void ConsoleWriteSection(string[] sectionString, Section section)
         {
             int tempY = CurserPosY;
             Console.SetCursorPosition(CurserPosX, CurserPosY);
-            foreach (string s in section)
+            foreach (string s in sectionString)
             {
-                Console.Write(s);
+                Console.Write(DrawParticipants(s, CurrentRace.GetSectionData(section).Left, CurrentRace.GetSectionData(section).Right));
                 tempY++;
                 Console.SetCursorPosition(CurserPosX, tempY);
 
             }
             Console.SetCursorPosition(CurserPosX, CurserPosY);
+        }
+        public static string DrawParticipants(string s, IParticipant P1, IParticipant P2)
+        {
+            //Replace the placeholders for the participants
+            return s.Replace("1", P1?.Name?.Substring(0, 1) ?? " ").Replace("2", P2?.Name?.Substring(0, 1) ?? " ");
         }
         public static void ChangeDirection(Direction direction)
         {
