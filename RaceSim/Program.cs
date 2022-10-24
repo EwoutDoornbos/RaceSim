@@ -11,7 +11,7 @@ namespace RaceSim // Note: actual namespace depends on the project name.
             Data.NextRace();
             //system.console.writeline(data.currentrace.track.name);
 
-            visualization.Initialize(Data.CurrentRace);
+            visualization.Initialize();
             visualization.DrawTrack(Data.CurrentRace.Track);
 
             for (; ; ) { Thread.Sleep(1000); }

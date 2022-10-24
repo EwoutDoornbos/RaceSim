@@ -8,17 +8,19 @@ namespace Model
 {
     public class car : IEquipment
     {
+        public car(int quality, int performance, int speed)
+        {
+            Quality = quality;
+            Performance = performance;
+            Speed = speed;
+            isBroken = false;
+        }
+
         public int Quality { get; set; }
         public int Performance { get; set; }
         public int Speed { get; set; }
         public bool isBroken { get; set; }
 
-        public car ()
-        {
-            Quality = 10;
-            Performance = 10;
-            Speed = 0;
-            this.isBroken = false;
-        }
+
     }
 }

@@ -15,8 +15,6 @@ namespace RaceSim
         private static int CurserPosX;
         private static int CurserPosY;
 
-        private static Race CurrentRace;
-
         private static Compas compas;
         private static Direction DirGoing;
 
@@ -25,7 +23,7 @@ namespace RaceSim
         public static string[] _startHorizontal = { "-----", " # 1 ", "     ", " 2 # ", "-----" };
         public static string[] _startVertical = { "|   |", "|# 1|", "|   |", "|2 #|", "|   |" };
 
-        private static string[] _finishHorizontal = { "-----", "▀▄▀▄▀", "▀▄▀▄▀", "▀▄▀▄▀", "-----" };
+        private static string[] _finishHorizontal = { "-----", "▀▄1▄▀", "▀▄▀▄▀", "▀▄2▄▀", "-----" };
         private static string[] _finishVertical = { "|▀▄▀|", "|▀▄▀|", "|▀▄▀|", "|▀▄▀|", "|▀▄▀|" };
 
         public static string[] _straightHorizontal = { "-----", "   1 ", "     ", "   2 ", "-----" };
@@ -43,22 +41,22 @@ namespace RaceSim
         public static string[] _cornerRightW = { "|   *", "|  1 ", "| 2  ", "|\\   ", "-----" };
 
         #endregion
-        public static void Initialize(Race race)
+        public static void Initialize()
         {
-            CurrentRace = race;
             compas = Compas.E;
             DirGoing = Direction.Straight;
+            Data.CurrentRace.DriversChanged += OnDriversChanged;
         }
         public static void DrawTrack(Track track)
         {
-            CurserPosX = 24;
-            CurserPosY = 16;
+            CurserPosX = 55;
+            CurserPosY = 3;
             Console.SetCursorPosition(CurserPosX, CurserPosY);
 
             foreach (Section section in track.Sections)
             {
-                
-                DrawSection(section );
+
+                DrawSection(section);
             }
             Console.SetCursorPosition(1, 1);
         }
@@ -75,16 +73,16 @@ namespace RaceSim
                     return SectionTypeToDirectionalSectionType(_straightVertical, _straightHorizontal, _straightVertical, _straightHorizontal);
                 case SectionTypes.LeftCorner:
                     string[] tempL = SectionTypeToDirectionalSectionType(_cornerLeftN, _cornerLeftE, _cornerLeftS, _cornerLeftW);
-                     DirGoing = Direction.Left; 
+                    DirGoing = Direction.Left;
                     return tempL;
                 case SectionTypes.RightCorner:
                     string[] tempR = SectionTypeToDirectionalSectionType(_cornerRightN, _cornerRightE, _cornerRightS, _cornerRightW);
-                    DirGoing = Direction.Right; 
+                    DirGoing = Direction.Right;
                     return tempR;
                 case SectionTypes.StartGrid:
                     return SectionTypeToDirectionalSectionType(_startVertical, _startHorizontal, _startVertical, _startHorizontal);
                 case SectionTypes.Finish:
-                    return SectionTypeToDirectionalSectionType(_finishVertical, _finishHorizontal, _finishVertical, _finishHorizontal );
+                    return SectionTypeToDirectionalSectionType(_finishVertical, _finishHorizontal, _finishVertical, _finishHorizontal);
                 default:
                     throw new ArgumentOutOfRangeException(nameof(sectionType), sectionType, null);
             }
@@ -108,20 +106,28 @@ namespace RaceSim
         public static void ConsoleWriteSection(string[] sectionString, Section section)
         {
             int tempY = CurserPosY;
+            Boolean isFinish = (section.Sectiontype == SectionTypes.Finish);
             Console.SetCursorPosition(CurserPosX, CurserPosY);
             foreach (string s in sectionString)
             {
-                Console.Write(DrawParticipants(s, CurrentRace.GetSectionData(section).Left, CurrentRace.GetSectionData(section).Right));
+                Console.Write(DrawParticipants(s, Data.CurrentRace.GetSectionData(section).Left, Data.CurrentRace.GetSectionData(section).Right, isFinish));
                 tempY++;
                 Console.SetCursorPosition(CurserPosX, tempY);
 
             }
             Console.SetCursorPosition(CurserPosX, CurserPosY);
         }
-        public static string DrawParticipants(string s, IParticipant P1, IParticipant P2)
+        public static string DrawParticipants(string s, IParticipant P1, IParticipant P2, Boolean isFinish)
         {
             //Replace the placeholders for the participants
-            return s.Replace("1", P1?.Name?.Substring(0, 1) ?? " ").Replace("2", P2?.Name?.Substring(0, 1) ?? " ");
+            if (isFinish)
+            {
+                return s.Replace("1", P1?.Name?.Substring(0, 1) ?? "▀").Replace("2", P2?.Name?.Substring(0, 1) ?? "▀");
+            }
+            else
+            {
+                return s.Replace("1", P1?.Name?.Substring(0, 1) ?? " ").Replace("2", P2?.Name?.Substring(0, 1) ?? " ");
+            }
         }
         public static void ChangeDirection(Direction direction)
         {
@@ -189,42 +195,45 @@ namespace RaceSim
         public static void ChangeCurserPosCorner(Direction dirGoing)
         {
 
-                switch (dirGoing)
-                {
-                    case Direction.Left:
-                        switch (compas)
-                        {
-                            case Compas.N:
-                                CurserPosX -= _straightHorizontal.Length; break;
-                            case Compas.E:
-                                CurserPosY -= _straightHorizontal.Length; break;
-                            case Compas.S:
-                                CurserPosX += _straightHorizontal.Length; break;
-                            case Compas.W:
-                                CurserPosY += _straightHorizontal.Length; break;
-                        }
-                        break;
-                    case Direction.Right:
-                        switch (compas)
-                        {
-                            case Compas.N:
-                                CurserPosX += _straightHorizontal.Length; break;
-                            case Compas.E:
-                                CurserPosY += _straightHorizontal.Length; break;
-                            case Compas.S:
-                                CurserPosX -= _straightHorizontal.Length; break;
-                            case Compas.W:
-                                CurserPosY -= _straightHorizontal.Length; break;
-                        }
-                        break;
-                    case Direction.Straight:
-                        break;
-                }
-           
-            
+            switch (dirGoing)
+            {
+                case Direction.Left:
+                    switch (compas)
+                    {
+                        case Compas.N:
+                            CurserPosX -= _straightHorizontal.Length; break;
+                        case Compas.E:
+                            CurserPosY -= _straightHorizontal.Length; break;
+                        case Compas.S:
+                            CurserPosX += _straightHorizontal.Length; break;
+                        case Compas.W:
+                            CurserPosY += _straightHorizontal.Length; break;
+                    }
+                    break;
+                case Direction.Right:
+                    switch (compas)
+                    {
+                        case Compas.N:
+                            CurserPosX += _straightHorizontal.Length; break;
+                        case Compas.E:
+                            CurserPosY += _straightHorizontal.Length; break;
+                        case Compas.S:
+                            CurserPosX -= _straightHorizontal.Length; break;
+                        case Compas.W:
+                            CurserPosY -= _straightHorizontal.Length; break;
+                    }
+                    break;
+                case Direction.Straight:
+                    break;
+            }
+
+
+        }
+        private static void OnDriversChanged(object sender, DriversChangedEventArgs e)
+        {
+            DrawTrack(e.Track);
         }
     }
-
     public enum Direction
     {
         Left,   Right, Straight
