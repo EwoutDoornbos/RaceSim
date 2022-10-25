@@ -13,11 +13,14 @@ namespace Controller
         public List<IParticipant> Participants;
         public DateTime StartTime;
         private Random _random;
-        private Dictionary<Section, SectionData> _positions;                                        
+        private Dictionary<Section, SectionData> _positions;
+        private Dictionary<IParticipant, int> _LapCount;
 
         public event EventHandler<DriversChangedEventArgs> DriversChanged;
 
         private System.Timers.Timer _timer;
+
+        private const int Laps = 2;
 
         public SectionData GetSectionData(Section section)
         {
@@ -60,6 +63,7 @@ namespace Controller
         }
         public void InitializeParticipantsStartPositions()
         {
+            _LapCount = new Dictionary<IParticipant, int>();
             _positions = new Dictionary<Section, SectionData>();
             Stack<Section> StartGridSections = GetStartSections();
             int i = 0;
@@ -133,12 +137,14 @@ namespace Controller
                 if (NextSectionData.Left == null)
                 {
                     NextSectionData.Left = CurrentSectionData.Left;
+                    CheckIfParticipantOnFinish(NextSection, NextSectionData.Left);
                     CurrentSectionData.Left = null;
                     CurrentSectionData.DistanceLeft = 0;
                 }
                 else if (NextSectionData.Right == null)
                 {
                     NextSectionData.Right = CurrentSectionData.Left;
+                    CheckIfParticipantOnFinish(NextSection, NextSectionData.Right);
                     CurrentSectionData.Left = null;
                     CurrentSectionData.DistanceLeft = 0;
                 }
@@ -155,12 +161,13 @@ namespace Controller
                 if (NextSectionData.Right == null)
                 {
                     NextSectionData.Right = CurrentSectionData.Right;
+                    CheckIfParticipantOnFinish(NextSection, NextSectionData.Right);
                     CurrentSectionData.Right = null;
-                    CurrentSectionData.DistanceRight = 0;
-                }
+                    CurrentSectionData.DistanceRight = 0;                }
                 else if (NextSectionData.Left == null)
                 {
                     NextSectionData.Left = CurrentSectionData.Right;
+                    CheckIfParticipantOnFinish(NextSection, NextSectionData.Left);
                     CurrentSectionData.Right = null;
                     CurrentSectionData.DistanceRight = 0;
                 }
@@ -168,6 +175,40 @@ namespace Controller
                 {
                     CurrentSectionData.DistanceRight = 99;
                 }
+            }
+        }
+        public void CheckIfParticipantOnFinish(Section NextSection, IParticipant participant)
+        {
+            if (NextSection.Sectiontype == SectionTypes.Finish)
+            {
+                ParticipantOnFinish(NextSection, participant);
+            }
+        }
+        public void ParticipantOnFinish(Section NextSection, IParticipant participant)
+        {
+            try
+            {
+                _LapCount[participant]++; Console.Write(_LapCount[participant]);
+                if (_LapCount[participant] == Laps)
+                {
+                    RemoveParticipant(participant, GetSectionData(NextSection));
+                }
+
+            }
+            catch (KeyNotFoundException)
+            {
+                _LapCount.Add(participant, 1); Console.Write(_LapCount[participant]);
+            }
+        }
+        public void RemoveParticipant(IParticipant participant, SectionData sectionData)
+        {
+            if(sectionData.Left == participant)
+            {
+                sectionData.Left = null;
+            }
+            else if(sectionData.Right == participant)
+            {
+                sectionData.Right = null;
             }
         }
         public int GetSpeedParticipant(IParticipant? participant)
