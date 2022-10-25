@@ -46,6 +46,7 @@ namespace RaceSim
             compas = Compas.E;
             DirGoing = Direction.Straight;
             Data.CurrentRace.DriversChanged += OnDriversChanged;
+            Race.NextRaceEvent += OnNextRace;
         }
         public static void DrawTrack(Track track)
         {
@@ -232,6 +233,16 @@ namespace RaceSim
         private static void OnDriversChanged(object sender, DriversChangedEventArgs e)
         {
             DrawTrack(e.Track);
+        }
+        private static void OnNextRace(object sender, EventArgs e)
+        {
+            Console.Clear();
+            Data.NextRace();
+            if (Data.CurrentRace != null)
+            {
+                Initialize();
+                DrawTrack(Data.CurrentRace.Track);
+            }
         }
     }
     public enum Direction

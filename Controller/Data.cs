@@ -33,29 +33,32 @@ namespace Controller
                 SectionTypes.StartGrid,
                 SectionTypes.StartGrid,
                 SectionTypes.StartGrid,
+                SectionTypes.Finish,
                 SectionTypes.RightCorner,
                 SectionTypes.Straight,
                 SectionTypes.Straight,
                 SectionTypes.Straight,
                 SectionTypes.RightCorner,
                 SectionTypes.Straight,
-                SectionTypes.Straight,
-                SectionTypes.Straight,
-                SectionTypes.Straight,
-                SectionTypes.Straight,
+                SectionTypes.RightCorner,
+                SectionTypes.LeftCorner,
+                SectionTypes.LeftCorner,
                 SectionTypes.RightCorner,
                 SectionTypes.Straight,
-                SectionTypes.Straight,
-                SectionTypes.Straight,
+                SectionTypes.RightCorner,
+                SectionTypes.LeftCorner,
                 SectionTypes.RightCorner,
                 SectionTypes.Straight,
-                SectionTypes.Finish
+                SectionTypes.RightCorner,
+                SectionTypes.LeftCorner,
+                SectionTypes.RightCorner
             }));
             competition.Tracks.Enqueue(new Track("Zandvoord", new[]
             {
                 SectionTypes.StartGrid,
                 SectionTypes.StartGrid,
                 SectionTypes.StartGrid,
+                SectionTypes.Finish,
                 SectionTypes.RightCorner,
                 SectionTypes.Straight,
                 SectionTypes.Straight,
@@ -71,8 +74,7 @@ namespace Controller
                 SectionTypes.Straight,
                 SectionTypes.Straight,
                 SectionTypes.RightCorner,
-                SectionTypes.Straight,
-                SectionTypes.Finish
+                SectionTypes.Straight
             }));
         }
         public static void NextRace()
@@ -81,7 +83,11 @@ namespace Controller
             if(NextTrack != null)
             {
                 CurrentRace = new Race(NextTrack, competition.Participants);
-             }
+            }
+            else
+            {
+                CurrentRace = null;
+            }
         }
     }
 }

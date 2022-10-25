@@ -18,6 +18,8 @@ namespace Controller
 
         public event EventHandler<DriversChangedEventArgs> DriversChanged;
 
+        public static event EventHandler NextRaceEvent; 
+
         private System.Timers.Timer _timer;
 
         private const int Laps = 2;
@@ -48,9 +50,9 @@ namespace Controller
         }
         public void OnTimedEvent(object sender, ElapsedEventArgs e)
         {
-            MoveParticipants();
-            // raise driversChanged event.
-            DriversChanged?.Invoke(this, new DriversChangedEventArgs() { Track = this.Track });
+            MoveParticipants(); 
+            DriversChanged?.Invoke(this, new DriversChangedEventArgs() { Track = this.Track });                     //Raise driversChanged event.
+            RaceFinishedCheck();                                                                                    //Checks if Race is finished, and calls event if so.
         }
         public void Start() { _timer.Start(); }
         public void RandomizeEquipment()
@@ -188,7 +190,7 @@ namespace Controller
         {
             try
             {
-                _LapCount[participant]++; Console.Write(_LapCount[participant]);
+                _LapCount[participant]++; 
                 if (_LapCount[participant] == Laps)
                 {
                     RemoveParticipant(participant, GetSectionData(NextSection));
@@ -197,7 +199,7 @@ namespace Controller
             }
             catch (KeyNotFoundException)
             {
-                _LapCount.Add(participant, 1); Console.Write(_LapCount[participant]);
+                _LapCount.Add(participant, 0); 
             }
         }
         public void RemoveParticipant(IParticipant participant, SectionData sectionData)
@@ -211,6 +213,28 @@ namespace Controller
                 sectionData.Right = null;
             }
         }
+        public void RaceFinishedCheck()
+        {
+            if (isRaceFinished())
+            {
+                CleanUp();
+                NextRaceEvent?.Invoke(this, new EventArgs());
+                
+            }
+        }
+        public bool isRaceFinished()
+        {
+            
+            foreach(Section s in Track.Sections)
+            {
+                if (GetSectionData(s).Left != null || GetSectionData(s).Right != null )
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
         public int GetSpeedParticipant(IParticipant? participant)
         {
             if (participant != null)
@@ -224,5 +248,10 @@ namespace Controller
                 return 0;
             }
         }
+        public void CleanUp()
+        {
+            DriversChanged = null;
+            _timer.Stop();        }
     }
+
 }
