@@ -14,17 +14,17 @@ namespace Controller
         public DateTime StartTime;
         private Random _random;
         private Dictionary<Section, SectionData> _positions;
-        private Dictionary<IParticipant, int> _LapCount;
+        public Dictionary<IParticipant, int> _LapCount { get; private set; }
 
         public event EventHandler<DriversChangedEventArgs> DriversChanged;
 
-        public static event EventHandler NextRaceEvent; 
+        public static event EventHandler NextRaceEvent;
 
         private System.Timers.Timer _timer;
 
-        private const int Laps = 2;
+        public int Laps { get; private set; }
 
-        public SectionData GetSectionData(Section section)
+    public SectionData GetSectionData(Section section)
         {
             try
             {
@@ -40,6 +40,7 @@ namespace Controller
         public Race(Track track, List<IParticipant> participants)
         {
             Track = track;
+            Laps = track.Laps;
             Participants = participants;
             _random = new Random(DateTime.Now.Millisecond);
             _timer = new System.Timers.Timer(500);
@@ -250,6 +251,7 @@ namespace Controller
         }
         public void CleanUp()
         {
+            _LapCount = null;
             DriversChanged = null;
             _timer.Stop();        }
     }

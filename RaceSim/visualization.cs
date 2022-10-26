@@ -59,7 +59,23 @@ namespace RaceSim
 
                 DrawSection(section);
             }
+            Console.SetCursorPosition(50, 1);
+            Console.Write($"Track: {Data.CurrentRace.Track.Name} ");
+            Console.SetCursorPosition(52, 2);
+            Console.Write($"Lap: {GetLapCount(Data.CurrentRace)}/{Data.CurrentRace.Laps}");
+
             Console.SetCursorPosition(1, 1);
+        }
+        public static int GetLapCount(Race race)
+        {
+            if (race._LapCount.Count != 0)
+            {
+                return race._LapCount.Min(x => x.Value)+1;
+            }
+            else
+            {
+                return 1;
+            }
         }
         public static void DrawSection(Section section)
         {

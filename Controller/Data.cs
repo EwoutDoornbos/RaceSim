@@ -52,7 +52,7 @@ namespace Controller
                 SectionTypes.RightCorner,
                 SectionTypes.LeftCorner,
                 SectionTypes.RightCorner
-            }));
+            }, 2));
             competition.Tracks.Enqueue(new Track("Zandvoord", new[]
             {
                 SectionTypes.StartGrid,
@@ -75,7 +75,7 @@ namespace Controller
                 SectionTypes.Straight,
                 SectionTypes.RightCorner,
                 SectionTypes.Straight
-            }));
+            }, 2));
         }
         public static void NextRace()
         {
@@ -87,6 +87,8 @@ namespace Controller
             else
             {
                 CurrentRace = null;
+                Console.WriteLine("\n\n\tAll Races completed\n\n");
+                Environment.Exit(0);
             }
         }
     }

@@ -8,11 +8,13 @@ namespace Model
 {
     public class Track
     {
-        public String Name { get; set; }
+        public String Name { get; private set; }
+        public int Laps { get; private set; }
         public LinkedList<Section> Sections;
-        public Track(String name, SectionTypes[] sections)
+        public Track(String name, SectionTypes[] sections, int Laps)
         {
             Name = name;
+            this.Laps = Laps;
             Sections = SectionTypesToLinkedList(sections);
         }
         internal LinkedList<Section> SectionTypesToLinkedList(SectionTypes[] sections)
