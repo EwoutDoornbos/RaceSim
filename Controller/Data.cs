@@ -52,7 +52,7 @@ namespace Controller
                 SectionTypes.RightCorner,
                 SectionTypes.LeftCorner,
                 SectionTypes.RightCorner
-            }, 2));
+            }, 1));
             competition.Tracks.Enqueue(new Track("Zandvoord", new[]
             {
                 SectionTypes.StartGrid,

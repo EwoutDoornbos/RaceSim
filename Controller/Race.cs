@@ -43,7 +43,7 @@ namespace Controller
             Laps = track.Laps;
             Participants = participants;
             _random = new Random(DateTime.Now.Millisecond);
-            _timer = new System.Timers.Timer(500);
+            _timer = new System.Timers.Timer(200);
             _timer.Elapsed += OnTimedEvent;
             _timer.Enabled = true;
             _timer.AutoReset = true;
@@ -51,7 +51,8 @@ namespace Controller
         }
         public void OnTimedEvent(object sender, ElapsedEventArgs e)
         {
-            MoveParticipants(); 
+            BreakOrRepairParticipants();
+            MoveParticipants();
             DriversChanged?.Invoke(this, new DriversChangedEventArgs() { Track = this.Track });                     //Raise driversChanged event.
             RaceFinishedCheck();                                                                                    //Checks if Race is finished, and calls event if so.
         }
@@ -131,53 +132,81 @@ namespace Controller
         public void MoveSingleSectionParticipants(Section CurrentSection, Section NextSection)
         {
             //Left Participant
-            SectionData CurrentSectionData = GetSectionData(CurrentSection);
-            SectionData NextSectionData = GetSectionData(NextSection);
-            try { CurrentSectionData.DistanceLeft += GetSpeedParticipant(CurrentSectionData.Left); }
-            catch (System.NullReferenceException) { CurrentSectionData.DistanceLeft = 0; }
-            if(CurrentSectionData.DistanceLeft >= 100)
+                SectionData CurrentSectionData = GetSectionData(CurrentSection);
+                SectionData NextSectionData = GetSectionData(NextSection);
+            if (CurrentSectionData.Left != null)
             {
-                if (NextSectionData.Left == null)
+                if (!CurrentSectionData.Left.Equipement.isBroken)
                 {
-                    NextSectionData.Left = CurrentSectionData.Left;
-                    CheckIfParticipantOnFinish(NextSection, NextSectionData.Left);
-                    CurrentSectionData.Left = null;
-                    CurrentSectionData.DistanceLeft = 0;
-                }
-                else if (NextSectionData.Right == null)
-                {
-                    NextSectionData.Right = CurrentSectionData.Left;
-                    CheckIfParticipantOnFinish(NextSection, NextSectionData.Right);
-                    CurrentSectionData.Left = null;
-                    CurrentSectionData.DistanceLeft = 0;
-                }
-                else
-                {
-                    CurrentSectionData.DistanceLeft = 99;
+                    try { CurrentSectionData.DistanceLeft += GetSpeedParticipant(CurrentSectionData.Left); }
+                    catch (System.NullReferenceException) { CurrentSectionData.DistanceLeft = 0; }
+                    if (CurrentSectionData.DistanceLeft >= 100)
+                    {
+                        if (NextSectionData.Left == null)
+                        {
+                            NextSectionData.Left = CurrentSectionData.Left;
+                            CheckIfParticipantOnFinish(NextSection, NextSectionData.Left);
+                            CurrentSectionData.Left = null;
+                            CurrentSectionData.DistanceLeft = 0;
+                        }
+                        else if (NextSectionData.Right == null)
+                        {
+                            NextSectionData.Right = CurrentSectionData.Left;
+                            CheckIfParticipantOnFinish(NextSection, NextSectionData.Right);
+                            CurrentSectionData.Left = null;
+                            CurrentSectionData.DistanceLeft = 0;
+                        }
+                        else
+                        {
+                            CurrentSectionData.DistanceLeft = 99;
+                        }
+                    }
                 }
             }
             //RightParticipant
-            try { CurrentSectionData.DistanceRight += GetSpeedParticipant(CurrentSectionData.Right); }
-            catch (System.NullReferenceException) { CurrentSectionData.DistanceRight = 0; }
-            if (CurrentSectionData.DistanceRight >= 100)
+            if (CurrentSectionData.Right != null)
             {
-                if (NextSectionData.Right == null)
+                if (!CurrentSectionData.Right.Equipement.isBroken)
                 {
-                    NextSectionData.Right = CurrentSectionData.Right;
-                    CheckIfParticipantOnFinish(NextSection, NextSectionData.Right);
-                    CurrentSectionData.Right = null;
-                    CurrentSectionData.DistanceRight = 0;                }
-                else if (NextSectionData.Left == null)
-                {
-                    NextSectionData.Left = CurrentSectionData.Right;
-                    CheckIfParticipantOnFinish(NextSection, NextSectionData.Left);
-                    CurrentSectionData.Right = null;
-                    CurrentSectionData.DistanceRight = 0;
+                    try { CurrentSectionData.DistanceRight += GetSpeedParticipant(CurrentSectionData.Right); }
+                    catch (System.NullReferenceException) { CurrentSectionData.DistanceRight = 0; }
+                    if (CurrentSectionData.DistanceRight >= 100)
+                    {
+                        if (NextSectionData.Right == null)
+                        {
+                            NextSectionData.Right = CurrentSectionData.Right;
+                            CheckIfParticipantOnFinish(NextSection, NextSectionData.Right);
+                            CurrentSectionData.Right = null;
+                            CurrentSectionData.DistanceRight = 0;
+                        }
+                        else if (NextSectionData.Left == null)
+                        {
+                            NextSectionData.Left = CurrentSectionData.Right;
+                            CheckIfParticipantOnFinish(NextSection, NextSectionData.Left);
+                            CurrentSectionData.Right = null;
+                            CurrentSectionData.DistanceRight = 0;
+                        }
+                        else
+                        {
+                            CurrentSectionData.DistanceRight = 99;
+                        }
+                    }
                 }
-                else
-                {
-                    CurrentSectionData.DistanceRight = 99;
-                }
+            }
+        }
+        public void BreakOrRepairParticipants()
+        {
+            foreach (IParticipant participant in Participants)
+            {
+                BreakOrRepairSingleParticipant(participant);
+            }
+        }
+        public void BreakOrRepairSingleParticipant(IParticipant participant)
+        {
+            bool BreakOrRepair = _random.Next(1, participant.Equipement.Quality) == participant.Equipement.Quality-1 ? true : false;
+            if (BreakOrRepair)
+            {
+                participant.Equipement.isBroken = participant.Equipement.isBroken ? false : true;
             }
         }
         public void CheckIfParticipantOnFinish(Section NextSection, IParticipant participant)
@@ -196,7 +225,6 @@ namespace Controller
                 {
                     RemoveParticipant(participant, GetSectionData(NextSection));
                 }
-
             }
             catch (KeyNotFoundException)
             {
