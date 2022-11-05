@@ -24,7 +24,7 @@ namespace RaceSim
         public static string[] _startVertical = { "|   |", "|# 1|", "|   |", "|2 #|", "|   |" };
 
         private static string[] _finishHorizontal = { "-----", "▀▄1▄▀", "▀▄▀▄▀", "▀▄2▄▀", "-----" };
-        private static string[] _finishVertical = { "|▀▄▀|", "|▀▄▀|", "|▀▄▀|", "|▀▄▀|", "|▀▄▀|" };
+        private static string[] _finishVertical = { "|▀▄▀|", "|▀▄▀|", "|1▄2|", "|▀▄▀|", "|▀▄▀|" };
 
         public static string[] _straightHorizontal = { "-----", "   1 ", "     ", "   2 ", "-----" };
         public static string[] _straightVertical = { "|   |", "|  1|", "|   |", "|2  |", "|   |" };

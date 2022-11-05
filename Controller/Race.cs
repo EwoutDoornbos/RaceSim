@@ -43,7 +43,7 @@ namespace Controller
             Laps = track.Laps;
             Participants = participants;
             _random = new Random(DateTime.Now.Millisecond);
-            _timer = new System.Timers.Timer(200);
+            _timer = new System.Timers.Timer(400);
             _timer.Elapsed += OnTimedEvent;
             _timer.Enabled = true;
             _timer.AutoReset = true;
@@ -221,7 +221,7 @@ namespace Controller
             try
             {
                 _LapCount[participant]++; 
-                if (_LapCount[participant] == Laps)
+                if (_LapCount[participant] >= Laps)
                 {
                     RemoveParticipant(participant, GetSectionData(NextSection));
                 }
