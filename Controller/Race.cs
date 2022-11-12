@@ -33,8 +33,15 @@ namespace Controller
             catch (KeyNotFoundException)
             {
                 SectionData sectionData = new SectionData();
-                _positions.Add(section, sectionData);
-                return sectionData;
+                try
+                {
+                    _positions.Add(section, sectionData);
+                    return sectionData;
+                }
+                catch (System.ArgumentException)
+                {
+                    return _positions[section];
+                }
             }
         }
         public Race(Track track, List<IParticipant> participants)
@@ -42,6 +49,7 @@ namespace Controller
             Track = track;
             Laps = track.Laps;
             Participants = participants;
+            _LapCount = new Dictionary<IParticipant, int>();
             _random = new Random(DateTime.Now.Millisecond);
             _timer = new System.Timers.Timer(400);
             _timer.Elapsed += OnTimedEvent;
@@ -67,7 +75,6 @@ namespace Controller
         }
         public void InitializeParticipantsStartPositions()
         {
-            _LapCount = new Dictionary<IParticipant, int>();
             _positions = new Dictionary<Section, SectionData>();
             Stack<Section> StartGridSections = GetStartSections();
             int i = 0;
@@ -228,7 +235,18 @@ namespace Controller
             }
             catch (KeyNotFoundException)
             {
-                _LapCount.Add(participant, 0); 
+                try
+                {
+                    _LapCount.Add(participant, 0);
+                }
+                catch (System.ArgumentException)
+                {
+                    _LapCount[participant]++;
+                    if (_LapCount[participant] >= Laps)
+                    {
+                        RemoveParticipant(participant, GetSectionData(NextSection));
+                    }
+                }
             }
         }
         public void RemoveParticipant(IParticipant participant, SectionData sectionData)

@@ -70,7 +70,7 @@ namespace RaceSim
         {
             if (race._LapCount.Count != 0)
             {
-                return race._LapCount.Min(x => x.Value)+1;
+                return race._LapCount.Max(x => x.Value)+1;
             }
             else
             {

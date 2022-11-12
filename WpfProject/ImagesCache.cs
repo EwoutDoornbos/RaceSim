@@ -10,13 +10,19 @@ using System.Windows.Media.Media3D;
 using System.Drawing.Imaging;
 using System.Windows.Media.Imaging;
 using System.Windows.Media;
+using System.Runtime.CompilerServices;
+using System.IO;
 
 namespace WpfProject
 {
-    
+
     public static class ImagesCache
     {
         private static Dictionary<string, Bitmap> imagesCache;
+        public static void Initialize()
+        {
+            imagesCache = new Dictionary<string, Bitmap>();
+        }
         public static Bitmap GetImageBitmap(string URL)
         {
             try
@@ -25,18 +31,18 @@ namespace WpfProject
             }
             catch (KeyNotFoundException)
             {
-                Bitmap bitmap = new Bitmap(URL);
+                Bitmap bitmap = new(URL);
                 imagesCache.Add(URL, bitmap);
-                return bitmap;
+                return (Bitmap)bitmap.Clone();
             }
         }
         public static void clearCache()
         {
             imagesCache.Clear();
         }
-        public static Bitmap BitmapEmpty(int dimensionX, int dimensionY)
+        public static Bitmap GetBitmapEmpty(int dimensionX, int dimensionY)
         {
-            
+
             try
             {
                 return (Bitmap)imagesCache["empty"].Clone();
@@ -50,7 +56,7 @@ namespace WpfProject
                 return (Bitmap)bitmap.Clone();
             }
         }
-        public static BitmapSource CreateBitmapSourceFromGdiBitmap(Bitmap bitmap)
+        public static BitmapSource GetBitmapSource(Bitmap bitmap)
         {
             if (bitmap == null)
                 throw new ArgumentNullException("bitmap");

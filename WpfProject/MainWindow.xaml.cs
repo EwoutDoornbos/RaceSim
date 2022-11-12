@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
+using Controller;
 
 namespace WpfProject
 {
@@ -22,7 +24,23 @@ namespace WpfProject
     {
         public MainWindow()
         {
+            Data.Initialize();
+            ImagesCache.Initialize();
+
+
+            Data.CurrentRace.DriversChanged += OnDriversChanged;
+
             InitializeComponent();
+        }
+        public void OnDriversChanged(Object sender, EventArgs e)
+        {
+            this.EmptyImage.Dispatcher.BeginInvoke(
+            DispatcherPriority.Render,
+            new Action(() =>
+            {
+                this.EmptyImage.Source = null;
+                this.EmptyImage.Source = VisualizationWPF.DrawTrack(Data.CurrentRace.Track);
+            }));
         }
     }
 }
