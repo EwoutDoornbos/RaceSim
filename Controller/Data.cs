@@ -10,7 +10,7 @@ namespace Controller
     public static class Data
     {
         public static Competition competition;
-        public static Race CurrentRace;
+        public static Race? CurrentRace;
 
         public static void Initialize()
         {
@@ -74,7 +74,7 @@ namespace Controller
                 SectionTypes.Straight,
                 SectionTypes.RightCorner,
                 SectionTypes.Straight*/
-            }, 2));
+            }, 1));
             competition.Tracks.Enqueue(new Track("Zandvoord", new[]
             {
                 SectionTypes.StartGrid,
@@ -97,7 +97,7 @@ namespace Controller
                 SectionTypes.Straight,
                 SectionTypes.RightCorner,
                 SectionTypes.Straight
-            }, 2));
+            }, 1));
         }
         public static void NextRace()
         {

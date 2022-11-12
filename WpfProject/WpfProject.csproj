@@ -8,6 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Assets\Icons\**" />
+    <EmbeddedResource Remove="Assets\Icons\**" />
+    <None Remove="Assets\Icons\**" />
+    <Page Remove="Assets\Icons\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Assets\Cars\Broken\Blue.png" />
     <None Remove="Assets\Cars\Broken\Green.png" />
     <None Remove="Assets\Cars\Broken\Grey.png" />

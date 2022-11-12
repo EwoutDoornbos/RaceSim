@@ -14,7 +14,7 @@ namespace Controller
         public DateTime StartTime;
         private Random _random;
         private Dictionary<Section, SectionData> _positions;
-        public Dictionary<IParticipant, int> _LapCount { get; private set; }
+        public Dictionary<IParticipant, int>? _LapCount { get; private set; }
 
         public event EventHandler<DriversChangedEventArgs> DriversChanged;
 
@@ -59,7 +59,7 @@ namespace Controller
         }
         public void OnTimedEvent(object sender, ElapsedEventArgs e)
         {
-            BreakOrRepairParticipants();
+/*            BreakOrRepairParticipants();*/
             MoveParticipants();
             DriversChanged?.Invoke(this, new DriversChangedEventArgs() { Track = this.Track });                     //Raise driversChanged event.
             RaceFinishedCheck();                                                                                    //Checks if Race is finished, and calls event if so.

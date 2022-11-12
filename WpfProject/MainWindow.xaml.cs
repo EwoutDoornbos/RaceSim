@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,6 +23,8 @@ namespace WpfProject
     /// </summary>
     public partial class MainWindow : Window
     {
+        private RaceStatistics? raceStatistics;
+        private ParticipantsStatistics? driverStatistics;
         public MainWindow()
         {
             Data.Initialize();
@@ -29,6 +32,7 @@ namespace WpfProject
 
 
             Data.CurrentRace.DriversChanged += OnDriversChanged;
+            Race.NextRaceEvent += OnNextRace;
 
             InitializeComponent();
         }
@@ -39,8 +43,55 @@ namespace WpfProject
             new Action(() =>
             {
                 this.EmptyImage.Source = null;
-                this.EmptyImage.Source = VisualizationWPF.DrawTrack(Data.CurrentRace.Track);
+                if (Data.CurrentRace != null)
+                {
+                    this.EmptyImage.Source = VisualizationWPF.DrawTrack(Data.CurrentRace.Track);
+                }
             }));
+        }
+        private void OnNextRace(object sender, EventArgs e)
+        {
+            Data.NextRace();
+
+            if (Data.CurrentRace != null)
+            {
+                Data.CurrentRace.DriversChanged += OnDriversChanged;
+            }
+        }
+
+        private void MenuItem_Exit_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
+        private void MenuItem_RaceStats_Click(object sender, RoutedEventArgs e)
+        {
+            raceStatistics = new RaceStatistics();
+            raceStatistics.Show();
+        }
+
+        private void MenuItem_DriverStats_Click(object sender, RoutedEventArgs e)
+        {
+            driverStatistics = new ParticipantsStatistics();
+            driverStatistics.Show();
+        }
+
+        private void MenuItem_Exit_Enter(object sender, MouseEventArgs e)
+        {
+            if (sender is Button button)
+            {
+                var converter = new System.Windows.Media.BrushConverter();
+                var brush = (System.Windows.Media.Brush)converter.ConvertFromString("#FFB70A0A");
+                button.Foreground = brush;
+            }
+        }
+
+        private void MenuItem_Exit_Leave(object sender, MouseEventArgs e)
+        {
+            if (sender is Button button)
+            {
+                button.Foreground = null;
+            }
         }
     }
 }

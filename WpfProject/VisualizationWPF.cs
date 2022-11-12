@@ -52,6 +52,7 @@ namespace WpfProject
         {
             compas = Compas.E;
             DirGoing = Direction.Straight;
+            Race.NextRaceEvent += OnNextRace;
         }
 
         public static BitmapSource DrawTrack(Model.Track track)
@@ -62,13 +63,6 @@ namespace WpfProject
             (int TrackWidth, int TrackHeight) = GetTrackSize(track.Sections);
             TrackCanvas = ImagesCache.GetBitmapEmpty(TrackWidth, TrackHeight);
             TrackGraphics = Graphics.FromImage(TrackCanvas);
-/*            Bitmap b = new Bitmap(SectionTypeToBitmap(SectionTypes.RightCorner));
-            Graphics g = Graphics.FromImage(b);
-            IParticipant P1 = Data.competition.Participants[3];
-            IParticipant P2 = Data.competition.Participants[4];
-            g.DrawImage(RotateBitmap(new Bitmap(P1Bitmap)), 30, 60);   
-            g.DrawImage(RotateBitmap(new Bitmap(P2Bitmap)), 70, 10);   
-            TrackGraphics.DrawImage(b, CurserPosX, CurserPosY);*/
             foreach (Section section in track.Sections)
             {
 
@@ -166,14 +160,16 @@ namespace WpfProject
         }
         public static void DrawSingleSection(Bitmap sectionBitmap, Section section)
         {
-
-            TrackGraphics.DrawImage(DrawParticipants(sectionBitmap, Data.CurrentRace.GetSectionData(section).Left, Data.CurrentRace.GetSectionData(section).Right, section.Sectiontype), CurserPosX, CurserPosY);
+            if (TrackGraphics != null && Data.CurrentRace != null)
+            {
+                TrackGraphics.DrawImage(DrawParticipants(sectionBitmap, Data.CurrentRace.GetSectionData(section).Left, Data.CurrentRace.GetSectionData(section).Right, section.Sectiontype), CurserPosX, CurserPosY);
+            }
         }
 
         public static Bitmap DrawParticipants(Bitmap sectionBitmap, IParticipant P1, IParticipant P2, SectionTypes sectionType)
         {
-            
-            Graphics g = Graphics.FromImage(sectionBitmap);
+            Bitmap sectionBitmapClone = (Bitmap)sectionBitmap.Clone();
+            Graphics g = Graphics.FromImage(sectionBitmapClone);
             if (P1 != null)
             {
                 Bitmap P1Bitmap = new Bitmap(ImagesCache.GetImageBitmap(GetParticipantURL(P1)));
@@ -358,7 +354,7 @@ namespace WpfProject
                         break;
                 }
             }
-            return sectionBitmap;            
+            return sectionBitmapClone;            
         }
         public static string GetParticipantURL(IParticipant P)
         {
@@ -479,6 +475,16 @@ namespace WpfProject
                 case Direction.Straight:
                     break;
             }
+        }
+        public static void OnNextRace(Object sender, EventArgs e)
+        {
+            CleanUp();
+        }
+        public static void CleanUp()
+        {
+            TrackCanvas = null;
+            TrackGraphics = null;
+            ImagesCache.clearCache();
         }
         public enum Direction
         {

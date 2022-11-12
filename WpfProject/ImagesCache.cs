@@ -25,15 +25,26 @@ namespace WpfProject
         }
         public static Bitmap GetImageBitmap(string URL)
         {
+            Bitmap bitmapClone;
+            Bitmap bitmap;
             try
             {
-                return imagesCache[URL];
+                bitmap = (Bitmap)imagesCache[URL];
+                lock (new object())
+                {
+                    bitmapClone = (Bitmap)bitmap.Clone();
+                }
+                return bitmapClone;
             }
             catch (KeyNotFoundException)
             {
-                Bitmap bitmap = new(URL);
+                bitmap = new(URL);
                 imagesCache.Add(URL, bitmap);
-                return (Bitmap)bitmap.Clone();
+                lock (new object())
+                {
+                    bitmapClone = (Bitmap)bitmap.Clone();
+                }
+                return bitmapClone;
             }
         }
         public static void clearCache()
@@ -59,7 +70,7 @@ namespace WpfProject
         public static BitmapSource GetBitmapSource(Bitmap bitmap)
         {
             if (bitmap == null)
-                throw new ArgumentNullException("bitmap");
+                return null;
 
             var rect = new Rectangle(0, 0, bitmap.Width, bitmap.Height);
 
