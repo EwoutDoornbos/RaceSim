@@ -24,7 +24,7 @@ namespace WpfProject
     public partial class MainWindow : Window
     {
         private RaceStatistics? raceStatistics;
-        private ParticipantsStatistics? driverStatistics;
+        private CompititionStatistics? driverStatistics;
         public MainWindow()
         {
             Data.Initialize();
@@ -72,7 +72,7 @@ namespace WpfProject
 
         private void MenuItem_DriverStats_Click(object sender, RoutedEventArgs e)
         {
-            driverStatistics = new ParticipantsStatistics();
+            driverStatistics = new CompititionStatistics();
             driverStatistics.Show();
         }
 
@@ -90,7 +90,9 @@ namespace WpfProject
         {
             if (sender is Button button)
             {
-                button.Foreground = null;
+                var converter = new System.Windows.Media.BrushConverter();
+                var color = (System.Windows.Media.Color)System.Windows.Media.Color.FromRgb(0,0,0); ; 
+                button.Foreground = new SolidColorBrush(color);
             }
         }
     }

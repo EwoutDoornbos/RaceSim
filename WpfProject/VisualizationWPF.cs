@@ -54,7 +54,17 @@ namespace WpfProject
             DirGoing = Direction.Straight;
             Race.NextRaceEvent += OnNextRace;
         }
-
+        public static int GetLapCount(Race race)
+        {
+            if (race._LapCount.Count != 0)
+            {
+                return race._LapCount.Max(x => x.Value) + 1;
+            }
+            else
+            {
+                return 1;
+            }
+        }
         public static BitmapSource DrawTrack(Model.Track track)
         {
             Initialize();

@@ -27,7 +27,8 @@ C:\Users\dank meme master 69\IdeaProjects\RaceSim\WpfProject\obj\Debug\net6.0-wi
 C:\Users\dank meme master 69\IdeaProjects\RaceSim\WpfProject\obj\Debug\net6.0-windows\WpfProject.pdb
 C:\Users\dank meme master 69\IdeaProjects\RaceSim\WpfProject\obj\Debug\net6.0-windows\WpfProject.genruntimeconfig.cache
 C:\Users\dank meme master 69\IdeaProjects\RaceSim\WpfProject\obj\Debug\net6.0-windows\ref\WpfProject.dll
-C:\Users\dank meme master 69\IdeaProjects\RaceSim\WpfProject\obj\Debug\net6.0-windows\ParticipantsStatistics.g.cs
 C:\Users\dank meme master 69\IdeaProjects\RaceSim\WpfProject\obj\Debug\net6.0-windows\RaceStatistics.g.cs
-C:\Users\dank meme master 69\IdeaProjects\RaceSim\WpfProject\obj\Debug\net6.0-windows\ParticipantsStatistics.baml
 C:\Users\dank meme master 69\IdeaProjects\RaceSim\WpfProject\obj\Debug\net6.0-windows\RaceStatistics.baml
+C:\Users\dank meme master 69\IdeaProjects\RaceSim\WpfProject\obj\Debug\net6.0-windows\GeneratedInternalTypeHelper.g.cs
+C:\Users\dank meme master 69\IdeaProjects\RaceSim\WpfProject\obj\Debug\net6.0-windows\CompititionStatistics.g.cs
+C:\Users\dank meme master 69\IdeaProjects\RaceSim\WpfProject\obj\Debug\net6.0-windows\CompititionStatistics.baml

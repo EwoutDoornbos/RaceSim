@@ -26,7 +26,7 @@ namespace ControllerTest
                 SectionTypes.Straight,
                 SectionTypes.RightCorner,
                 SectionTypes.Finish
-            });
+            }, 1);
             List<IParticipant> participants = new List<IParticipant>();
             participants.Add(new Driver("Driver 1", 0, new car(10, 5, 10), TeamColors.Blue));
             participants.Add(new Driver("Driver 2", 0, new car(10, 5, 10), TeamColors.Red));

@@ -74,7 +74,7 @@ namespace Controller
                 SectionTypes.Straight,
                 SectionTypes.RightCorner,
                 SectionTypes.Straight*/
-            }, 1));
+            }, 2));
             competition.Tracks.Enqueue(new Track("Zandvoord", new[]
             {
                 SectionTypes.StartGrid,

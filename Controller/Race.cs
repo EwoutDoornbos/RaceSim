@@ -59,8 +59,8 @@ namespace Controller
         }
         public void OnTimedEvent(object sender, ElapsedEventArgs e)
         {
-/*            BreakOrRepairParticipants();*/
-            MoveParticipants();
+/*            BreakOrRepairParticipants();
+*/            MoveParticipants();
             DriversChanged?.Invoke(this, new DriversChangedEventArgs() { Track = this.Track });                     //Raise driversChanged event.
             RaceFinishedCheck();                                                                                    //Checks if Race is finished, and calls event if so.
         }
@@ -230,6 +230,7 @@ namespace Controller
                 _LapCount[participant]++; 
                 if (_LapCount[participant] >= Laps)
                 {
+                    _LapCount.Remove(participant);
                     RemoveParticipant(participant, GetSectionData(NextSection));
                 }
             }

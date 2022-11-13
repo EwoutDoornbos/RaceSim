@@ -6,7 +6,26 @@
         xmlns:local="clr-namespace:WpfProject"
         mc:Ignorable="d"
         Title="RaceStatistics" Height="450" Width="800">
+    <Window.DataContext>
+        <local:RaceDataContext/>
+    </Window.DataContext>
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <DockPanel Grid.Column="0">
+            <Label DockPanel.Dock="Top" Content="Track Info"/>
+            <Label DockPanel.Dock="Top" Content="{Binding TrackInfo}"/>
+        </DockPanel>
+        <DockPanel Grid.Column="1">
+            <Label DockPanel.Dock="Top" Content="Leaderboard"/>
+            <ListView Margin="10" ItemsSource="{Binding Leaderboard}"/>
+        </DockPanel>
+        <DockPanel Grid.Column="2">
+            <Label DockPanel.Dock="Top" Content="Equipement Stats"/>
+            <ListView Margin="10" ItemsSource="{Binding EquipementStats}"/>
+        </DockPanel>
     </Grid>
 </Window>

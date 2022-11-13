@@ -6,6 +6,9 @@
         xmlns:local="clr-namespace:WpfProject"
         mc:Ignorable="d"
         Title="MainWindow" Height="800" Width="800">
+    <Window.DataContext>
+        <local:MainWinDataContext  x:Name="MainWinDataContext"/>
+    </Window.DataContext>
     <Grid>
         <Image x:Name="EmptyImage" />
         <DockPanel LastChildFill="False" RenderTransformOrigin="0.424,0.498">
@@ -16,10 +19,12 @@
                 <MenuItem Header="Menu" HorizontalAlignment="Left">
                     <Button x:Name="RaceStatisticsB" Content="Race Statistics" Click="MenuItem_RaceStats_Click"/>
                     <Button x:Name="DriverStatisticsB" Content="Driver Statistics" Click="MenuItem_DriverStats_Click"/>
-                    <Button x:Name="Exit" Content="Exit" Click="MenuItem_Exit_Click"/>
+                    <Button x:Name="Exit" Content="Exit" Click="MenuItem_Exit_Click" MouseEnter="MenuItem_Exit_Enter" MouseLeave="MenuItem_Exit_Leave"/>
                 </MenuItem>
             </Menu>
         </DockPanel>
+        <Label Margin="20,20,10,10" Content="{Binding NameTrack, Mode=OneWay}"/>
+
     </Grid>
 </Window>
 

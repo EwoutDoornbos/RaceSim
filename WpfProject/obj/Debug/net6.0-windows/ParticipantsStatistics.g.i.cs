@@ -53,7 +53,7 @@ namespace WpfProject {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/WpfProject;component/participantsstatistics.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/WpfProject;V1.0.0.0;component/participantsstatistics.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\ParticipantsStatistics.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);
