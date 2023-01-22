@@ -368,7 +368,7 @@ namespace WpfProject
         }
         public static string GetParticipantURL(IParticipant P)
         {
-                bool broken = P.Equipement.isBroken;
+                bool broken = P.Equipement.IsBroken;
                 switch (P.TeamColor)
                 {
                     case TeamColors.Red:

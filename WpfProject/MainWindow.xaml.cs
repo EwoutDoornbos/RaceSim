@@ -70,7 +70,7 @@ namespace WpfProject
             raceStatistics.Show();
         }
 
-        private void MenuItem_DriverStats_Click(object sender, RoutedEventArgs e)
+        private void MenuItem_CompititionStats_Click(object sender, RoutedEventArgs e)
         {
             driverStatistics = new CompititionStatistics();
             driverStatistics.Show();

@@ -18,7 +18,7 @@
                 VerticalAlignment="Top">
                 <MenuItem Header="Menu" HorizontalAlignment="Left">
                     <Button x:Name="RaceStatisticsB" Content="Race Statistics" Click="MenuItem_RaceStats_Click"/>
-                    <Button x:Name="DriverStatisticsB" Content="Driver Statistics" Click="MenuItem_DriverStats_Click"/>
+                    <Button x:Name="CompetitionStatisticsB" Content="Competition Statistics" Click="MenuItem_CompititionStats_Click"/>
                     <Button x:Name="Exit" Content="Exit" Click="MenuItem_Exit_Click" MouseEnter="MenuItem_Exit_Enter" MouseLeave="MenuItem_Exit_Leave"/>
                 </MenuItem>
             </Menu>

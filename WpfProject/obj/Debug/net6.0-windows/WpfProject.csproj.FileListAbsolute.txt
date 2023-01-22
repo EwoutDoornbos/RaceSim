@@ -32,3 +32,4 @@ C:\Users\dank meme master 69\IdeaProjects\RaceSim\WpfProject\obj\Debug\net6.0-wi
 C:\Users\dank meme master 69\IdeaProjects\RaceSim\WpfProject\obj\Debug\net6.0-windows\GeneratedInternalTypeHelper.g.cs
 C:\Users\dank meme master 69\IdeaProjects\RaceSim\WpfProject\obj\Debug\net6.0-windows\CompititionStatistics.g.cs
 C:\Users\dank meme master 69\IdeaProjects\RaceSim\WpfProject\obj\Debug\net6.0-windows\CompititionStatistics.baml
+C:\Users\dank meme master 69\IdeaProjects\RaceSim\WpfProject\obj\Debug\net6.0-windows\App.baml

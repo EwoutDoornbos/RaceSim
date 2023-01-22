@@ -15,11 +15,11 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <DockPanel Grid.Column="0">
-            <Label DockPanel.Dock="Top" Content="Teams"/>
+            <Label DockPanel.Dock="Top" Content="Teams" Style="{DynamicResource StatsLabel}"/>
             <ListView Margin="10" ItemsSource="{Binding Teams}"/>
         </DockPanel>
         <DockPanel Grid.Column="1">
-            <Label DockPanel.Dock="Top" Content="Compitition Info"/>
+            <Label DockPanel.Dock="Top" Content="Compitition Info" Style="{DynamicResource StatsLabel}"/>
             <ListView Margin="10" ItemsSource="{Binding CompititionInfo}"/>
         </DockPanel>
     </Grid>

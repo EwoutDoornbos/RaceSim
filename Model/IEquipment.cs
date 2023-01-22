@@ -11,6 +11,6 @@ namespace Model
         public int Quality { get; set; }
         public int Performance { get; set; }
         public int Speed { get; set; }
-        public Boolean isBroken { get; set; }
+        public Boolean IsBroken { get; set; }
     }
 }

@@ -10,11 +10,7 @@ namespace WpfProject
 {
     public class MainWinDataContext : INotifyPropertyChanged
     {
-        public string NameTrack {
-            get => Data.CurrentRace != null
-                ? $"Track:\t{Data.CurrentRace.Track.Name}\nLaps:\t{VisualizationWPF.GetLapCount(Data.CurrentRace)}/{Data.CurrentRace.Laps}"
-                : "All races\nhave finished!";
-        }
+        
         public event PropertyChangedEventHandler PropertyChanged;
 
         public MainWinDataContext()

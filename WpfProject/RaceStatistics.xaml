@@ -9,6 +9,10 @@
     <Window.DataContext>
         <local:RaceDataContext/>
     </Window.DataContext>
+    <Window.Resources>
+        <local:IsBrokenConverter x:Key="IsBrokenConverter"/>
+        <local:TeamColorConverter x:Key="TeamColorConverter"/>
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -16,16 +20,39 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <DockPanel Grid.Column="0">
-            <Label DockPanel.Dock="Top" Content="Track Info"/>
-            <Label DockPanel.Dock="Top" Content="{Binding TrackInfo}"/>
+            <Label DockPanel.Dock="Top" Content="Track Info" Style="{DynamicResource StatsLabel}"/>
+            <Label DockPanel.Dock="Top" Content="{Binding NameTrack}"/>
+            <Label DockPanel.Dock="Top" Content="{Binding TrackLength}"/>
+            <Label DockPanel.Dock="Top" Content="{Binding LapCount}"/>
         </DockPanel>
         <DockPanel Grid.Column="1">
-            <Label DockPanel.Dock="Top" Content="Leaderboard"/>
-            <ListView Margin="10" ItemsSource="{Binding Leaderboard}"/>
+            <Label DockPanel.Dock="Top" Content="Leaderboard" Style="{DynamicResource StatsLabel}"/>
+            <ListView Margin="10" ItemsSource="{Binding Leaderboard}">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Position" DisplayMemberBinding="{Binding Value}"/>
+                        <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Key.Name}"/>
+                        <GridViewColumn Header="Car Performance" DisplayMemberBinding="{Binding Key.Equipement.Performance}"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
         </DockPanel>
         <DockPanel Grid.Column="2">
-            <Label DockPanel.Dock="Top" Content="Equipement Stats"/>
-            <ListView Margin="10" ItemsSource="{Binding EquipementStats}"/>
+            <Label DockPanel.Dock="Top" Content="Equipement Stats" Style="{DynamicResource StatsLabel}"/>
+            <ListView Margin="10" ItemsSource="{Binding EquipementStats}">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Color">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Rectangle Width="10" Height="10" Fill="{Binding TeamColor, Converter={StaticResource TeamColorConverter}}"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Condition" DisplayMemberBinding="{Binding Equipement.IsBroken, Converter={StaticResource IsBrokenConverter}}"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
         </DockPanel>
     </Grid>
 </Window>

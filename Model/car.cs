@@ -13,13 +13,13 @@ namespace Model
             Quality = quality;
             Performance = performance;
             Speed = speed;
-            isBroken = false;
+            IsBroken = false;
         }
 
         public int Quality { get; set; }
         public int Performance { get; set; }
         public int Speed { get; set; }
-        public bool isBroken { get; set; }
+        public bool IsBroken { get; set; }
 
 
     }
