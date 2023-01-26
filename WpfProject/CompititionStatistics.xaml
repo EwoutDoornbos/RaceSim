@@ -9,18 +9,36 @@
     <Window.DataContext>
         <local:CompititionDataContext/>
     </Window.DataContext>
+    <Window.Resources>
+        <local:SectionLengthConverter x:Key="SectionLengthConverter"/>
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <DockPanel Grid.Column="0">
-            <Label DockPanel.Dock="Top" Content="Teams" Style="{DynamicResource StatsLabel}"/>
-            <ListView Margin="10" ItemsSource="{Binding Teams}"/>
+            <Label DockPanel.Dock="Top" Content="Upcomming Tracks" Style="{DynamicResource StatsLabel}"/>
+            <ListView Margin="10" ItemsSource="{Binding TracksList}">
+            <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}"/>
+                        <GridViewColumn Header="Length" DisplayMemberBinding="{Binding Sections, Converter={StaticResource SectionLengthConverter}}"/>
+                        <GridViewColumn Header="Laps" DisplayMemberBinding="{Binding Laps}"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
         </DockPanel>
         <DockPanel Grid.Column="1">
-            <Label DockPanel.Dock="Top" Content="Compitition Info" Style="{DynamicResource StatsLabel}"/>
-            <ListView Margin="10" ItemsSource="{Binding CompititionInfo}"/>
+            <Label DockPanel.Dock="Top" Content="Participant Points" Style="{DynamicResource StatsLabel}"/>
+            <ListView Grid.Row="1" ItemsSource="{Binding ParticipantPoints}">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}"/>
+                        <GridViewColumn Header="Points" DisplayMemberBinding="{Binding Points}"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>        
         </DockPanel>
     </Grid>
 </Window>

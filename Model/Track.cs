@@ -10,7 +10,7 @@ namespace Model
     {
         public String Name { get; private set; }
         public int Laps { get; private set; }
-        public LinkedList<Section> Sections;
+        public LinkedList<Section> Sections { get; private set; }
         public Track(String name, SectionTypes[] sections, int Laps)
         {
             Name = name;

@@ -2,24 +2,19 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using Model;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace WpfProject
 {
-    public class CompititionDataContext
+    public class CompititionDataContext : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public IEnumerable<string> Teams
-        {
-            get;
-        }
-        public string CompititionInfo
-        {
-            get;
-        }
+        public IEnumerable<IParticipant> ParticipantPoints  => Data.CurrentRace.Participants.OrderByDescending(x => x.Points).ToList();
+        public IEnumerable<Track> TracksList => Data.competition.Tracks.ToList();
 
         public CompititionDataContext()
         {
@@ -27,7 +22,6 @@ namespace WpfProject
             {
                 Data.CurrentRace.DriversChanged += OnDriversChanged;
             }
-
         }
 
         public void OnDriversChanged(Object sender, EventArgs e)

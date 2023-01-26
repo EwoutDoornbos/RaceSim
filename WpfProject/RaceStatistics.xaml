@@ -31,8 +31,15 @@
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="Position" DisplayMemberBinding="{Binding Value}"/>
+                        <GridViewColumn Header="Color">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Rectangle Width="10" Height="10" Fill="{Binding Key.TeamColor, Converter={StaticResource TeamColorConverter}}"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
                         <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Key.Name}"/>
-                        <GridViewColumn Header="Car Performance" DisplayMemberBinding="{Binding Key.Equipement.Performance}"/>
+                        <GridViewColumn Header="Speed" DisplayMemberBinding="{Binding Key.Equipement.Speed}"/>
                     </GridView>
                 </ListView.View>
             </ListView>
@@ -49,6 +56,8 @@
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
+                        <GridViewColumn Header="Quality" DisplayMemberBinding="{Binding Equipement.Quality}"/>
+                        <GridViewColumn Header="Performance" DisplayMemberBinding="{Binding Equipement.Performance}"/>
                         <GridViewColumn Header="Condition" DisplayMemberBinding="{Binding Equipement.IsBroken, Converter={StaticResource IsBrokenConverter}}"/>
                     </GridView>
                 </ListView.View>

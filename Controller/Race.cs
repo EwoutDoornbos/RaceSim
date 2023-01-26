@@ -241,7 +241,9 @@ namespace Controller
                 if (_LapCount[participant] >= Laps)
                 {
                     _LapCount.Remove(participant);
-                    _FinishedParticipants.Add(participant, _FinishedParticipants.Count + 1);
+                    int FinishPosition = _FinishedParticipants.Count;
+                    _FinishedParticipants.Add(participant, FinishPosition + 1);
+                    AddParticipantPoints(participant, FinishPosition);
                     RemoveParticipant(participant, GetSectionData(NextSection));
                 }
             }
@@ -283,7 +285,6 @@ namespace Controller
         }
         public bool isRaceFinished()
         {
-
             foreach (Section s in Track.Sections)
             {
                 if (GetSectionData(s).Left != null || GetSectionData(s).Right != null)
@@ -306,6 +307,11 @@ namespace Controller
             {
                 return 0;
             }
+        }
+        public void AddParticipantPoints(IParticipant Recipient, int Position)
+        {
+            int[] Score = {15, 10 , 8, 4, 2, 1};
+            Recipient.Points += Score[Position];
         }
         public Dictionary<IParticipant, int> GetParticipantPositions()
         {

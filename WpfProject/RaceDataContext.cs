@@ -36,7 +36,7 @@ namespace WpfProject
         }
         public Dictionary<IParticipant, int> Leaderboard
         {
-            get => Data.CurrentRace?.GetParticipantPositions();
+            get => Data.CurrentRace.GetParticipantPositions();
         }
         public IEnumerable<IParticipant> EquipementStats => Data.CurrentRace.Participants.ToList();
 
