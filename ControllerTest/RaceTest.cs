@@ -5,12 +5,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Model;
+using System.Runtime.ConstrainedExecution;
 
 namespace ControllerTest
 {
     public class RaceTest
     {
+
         private Race race;
+
+        // create own set of participants and tracks
+        private List<IParticipant> participants;
+
+        private IEquipment equipment;
+        private Track track;
+
         [SetUp]
         public void SetUp()
         {
@@ -46,7 +55,13 @@ namespace ControllerTest
         public void GetStartSections_oneInList_DoesntReturnNull()
         {
             Stack<Section> test= race.GetStartSections();
-            Assert.IsTrue(test!=null);
+            Assert.IsNotNull(test);
+        }
+                [Test]
+        public void GetStartSections_OneInList_OneInResult()
+        {
+            Stack<Section> test= race.GetStartSections();
+            Assert.IsTrue(test.Count == 1);
         }
         [Test]
         public void InitializeParticipantsStartPositions_Participants_shouldPlaceParticipantOnStart()
@@ -54,5 +69,37 @@ namespace ControllerTest
             SectionData testS = race.GetSectionData(race.Track.Sections.First());
             Assert.IsNotNull(testS.Left);
         }
+        [Test]
+        public void Race_Instance_ShouldNotNull()
+        {
+            Assert.IsNotNull(race);
+        }
+        [Test]
+        public void GetStartGrids_OneInList_ShouldNotReturnNull()
+        {
+            Assert.NotNull(race.GetStartSections());
+        }
+        [Test]
+        public void AddParticipantsPoints_FirstPlace_Adds15()
+        {
+            IParticipant p = new Driver("Driver", 0, new car(10, 5, 10), TeamColors.Blue);
+            race.AddParticipantPoints(p, 0);
+            Assert.IsTrue(p.Points == 15);
+        }
+        
+        
+        [Test]
+        public void GetStartGrids_OneInList_ShouldReturnListContainingOnlyStartGrids()
+        {
+            // Arrange
+            var startGrids = race.GetStartSections();
+
+            // Act
+            var result = startGrids.Any(x => x.Sectiontype != SectionTypes.StartGrid);
+
+            // Assert
+            Assert.That(result, Is.False);
+        }
+
     }
 }

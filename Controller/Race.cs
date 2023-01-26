@@ -238,7 +238,7 @@ namespace Controller
             try
             {
                 _LapCount[participant]++;
-                if (_LapCount[participant] >= Laps)
+                if (_LapCount[participant] > Laps)
                 {
                     _LapCount.Remove(participant);
                     int FinishPosition = _FinishedParticipants.Count;

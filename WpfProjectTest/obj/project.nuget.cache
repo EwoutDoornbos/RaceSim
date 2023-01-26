@@ -1,0 +1,18 @@
+{
+  "version": 2,
+  "dgSpecHash": "xoIB+fELG2APuI/SlaZz6qd7KDCL2ZBhasB37tTTV1C9Ta+k7qV0Tq8bzLwpOpdaQWoaIyoQ3LlFi5P9dArEwQ==",
+  "success": false,
+  "projectFilePath": "C:\\Users\\dank meme master 69\\IdeaProjects\\RaceSim\\WpfProjectTest\\WpfProjectTest.csproj",
+  "expectedPackageFiles": [],
+  "logs": [
+    {
+      "code": "NU1201",
+      "level": "Error",
+      "message": "Project WpfProject is not compatible with netcoreapp3.1 (.NETCoreApp,Version=v3.1). Project WpfProject supports: net6.0-windows7.0 (.NETCoreApp,Version=v6.0)",
+      "libraryId": "WpfProject",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v3.1"
+      ]
+    }
+  ]
+}

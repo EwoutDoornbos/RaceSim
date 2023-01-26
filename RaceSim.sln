@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Controller", "Controller\Co
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ControllerTest", "ControllerTest\ControllerTest.csproj", "{091BCEB8-B1DD-47F5-8543-54702BAD7D68}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfProject", "WpfProject\WpfProject.csproj", "{8C194BF5-1A7E-4479-87EA-08D94625DDBD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfProject", "WpfProject\WpfProject.csproj", "{8C194BF5-1A7E-4479-87EA-08D94625DDBD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModelTest", "ModelTest\ModelTest.csproj", "{1F6D3F69-AEF0-46D5-A149-1FDEFDBF5D1A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{8C194BF5-1A7E-4479-87EA-08D94625DDBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8C194BF5-1A7E-4479-87EA-08D94625DDBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8C194BF5-1A7E-4479-87EA-08D94625DDBD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F6D3F69-AEF0-46D5-A149-1FDEFDBF5D1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F6D3F69-AEF0-46D5-A149-1FDEFDBF5D1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F6D3F69-AEF0-46D5-A149-1FDEFDBF5D1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F6D3F69-AEF0-46D5-A149-1FDEFDBF5D1A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

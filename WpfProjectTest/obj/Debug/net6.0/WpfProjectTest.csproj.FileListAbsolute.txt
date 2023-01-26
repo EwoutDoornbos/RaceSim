@@ -1,0 +1,5 @@
+C:\Users\dank meme master 69\IdeaProjects\RaceSim\WpfProjectTest\obj\Debug\net6.0\WpfProjectTest.csproj.AssemblyReference.cache
+C:\Users\dank meme master 69\IdeaProjects\RaceSim\WpfProjectTest\obj\Debug\net6.0\WpfProjectTest.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\dank meme master 69\IdeaProjects\RaceSim\WpfProjectTest\obj\Debug\net6.0\WpfProjectTest.AssemblyInfoInputs.cache
+C:\Users\dank meme master 69\IdeaProjects\RaceSim\WpfProjectTest\obj\Debug\net6.0\WpfProjectTest.AssemblyInfo.cs
+C:\Users\dank meme master 69\IdeaProjects\RaceSim\WpfProjectTest\obj\Debug\net6.0\WpfProjectTest.csproj.CoreCompileInputs.cache

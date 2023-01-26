@@ -29,7 +29,7 @@ namespace ControllerTest
             Track track = new Track("Track", new[] {SectionTypes.StartGrid, SectionTypes.Finish, }, 1);
             _competition.Tracks.Enqueue(track);
             var result = _competition.NextTrack();
-            Assert.AreEqual(track, result);
+            Assert.That(result, Is.EqualTo(track));
         }
         [Test]
         public void NextTrack_OneInQueue_RemoveTrackFromQueue()
@@ -48,8 +48,11 @@ namespace ControllerTest
             _competition.Tracks.Enqueue(track2);
             var result = _competition.NextTrack();
             var result2 = _competition.NextTrack();
-            Assert.AreEqual(track, result);
-            Assert.AreEqual(track2, result2);
+            Assert.Multiple(() =>
+            {
+                Assert.That(result, Is.EqualTo(track));
+                Assert.That(result2, Is.EqualTo(track2));
+            });
         }
     }
 }

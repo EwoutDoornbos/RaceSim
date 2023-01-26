@@ -56,9 +56,9 @@ namespace WpfProject
         }
         public static int GetLapCount(Race race)
         {
-            if (race._LapCount.Count != 0)
+            if (race._LapCount.Count != 0 && race._LapCount.Max(x => x.Value)!=0)
             {
-                return race._LapCount.Max(x => x.Value) + 1;
+                return race._LapCount.Max(x => x.Value);
             }
             else
             {
