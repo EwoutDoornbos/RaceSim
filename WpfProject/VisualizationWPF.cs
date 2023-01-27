@@ -42,23 +42,23 @@ namespace WpfProject
         private static int CurserPosX;
         private static int CurserPosY;
 
-        private static Compas compas;
-        private static Direction DirGoing;
+        private static Compas DirectionCompas;
+        private static Direction CornerDirGoing;
 
         private static Bitmap TrackCanvas;
         private static Graphics TrackGraphics;
 
         public static void Initialize()
         {
-            compas = Compas.E;
-            DirGoing = Direction.Straight;
+            Compas = Compas.E;
+            CornerDirGoing = Direction.Straight;
             Race.NextRaceEvent += OnNextRace;
         }
         public static int GetLapCount(Race race)
         {
-            if (race._LapCount.Count != 0 && race._LapCount.Max(x => x.Value)!=0)
+            if (race._lapCount.Count != 0 && race._lapCount.Max(x => x.Value)!=0)
             {
-                return race._LapCount.Max(x => x.Value);
+                return race._lapCount.Max(x => x.Value);
             }
             else
             {
@@ -134,12 +134,12 @@ namespace WpfProject
                     return RotateBitmap(new Bitmap(ImagesCache.GetImageBitmap(_straight)));
                 case SectionTypes.LeftCorner:
                     Bitmap tempL = RotateBitmap(new Bitmap(ImagesCache.GetImageBitmap(_corner)));
-                    DirGoing = Direction.Left;
+                    CornerDirGoing = Direction.Left;
                     return tempL;
                 case SectionTypes.RightCorner:
                     Bitmap tempr = new Bitmap(ImagesCache.GetImageBitmap(_corner)); tempr.RotateFlip(RotateFlipType.RotateNoneFlipX);
                     Bitmap tempR = RotateBitmap(tempr);
-                    DirGoing = Direction.Right;
+                    CornerDirGoing = Direction.Right;
                     return tempR;
                 case SectionTypes.StartGrid:
                     return RotateBitmap(new Bitmap(ImagesCache.GetImageBitmap(_start)));
@@ -151,7 +151,7 @@ namespace WpfProject
         }
         public static Bitmap RotateBitmap(Bitmap bitmap)
         {
-            switch (compas)
+            switch (Compas)
             {
                 case Compas.N:
                     return bitmap;
@@ -165,7 +165,7 @@ namespace WpfProject
                     bitmap.RotateFlip(RotateFlipType.Rotate270FlipNone);
                     return bitmap;
                 default:
-                    throw new ArgumentOutOfRangeException(nameof(compas), compas, null);
+                    throw new ArgumentOutOfRangeException(nameof(Compas), Compas, null);
             };
         }
         public static void DrawSingleSection(Bitmap sectionBitmap, Section section)
@@ -186,7 +186,7 @@ namespace WpfProject
                 switch (sectionType)
                 {
                     case SectionTypes.StartGrid:
-                        switch (compas)
+                        switch (Compas)
                         {
                             case Compas.N:
                                 g.DrawImage(RotateBitmap(P1Bitmap), 16, 40);
@@ -203,7 +203,7 @@ namespace WpfProject
                         }
                         break;  
                     case SectionTypes.LeftCorner:
-                        switch (compas)
+                        switch (Compas)
                         {
                             case Compas.N:
                                 g.DrawImage(RotateBitmap(P1Bitmap), 10, 70);
@@ -220,7 +220,7 @@ namespace WpfProject
                         }
                         break;  
                     case SectionTypes.RightCorner:
-                        switch (compas)
+                        switch (Compas)
                         {
                             case Compas.N:
                                 g.DrawImage(RotateBitmap(P1Bitmap), 20, 30);
@@ -237,7 +237,7 @@ namespace WpfProject
                         }
                         break;  
                     case SectionTypes.Straight:
-                        switch (compas)
+                        switch (Compas)
                         {
                             case Compas.N:
                                 g.DrawImage(RotateBitmap(P1Bitmap), 16, 38);
@@ -254,7 +254,7 @@ namespace WpfProject
                         }
                         break;  
                     case SectionTypes.Finish:
-                        switch (compas)
+                        switch (Compas)
                         {
                             case Compas.N:
                                 g.DrawImage(RotateBitmap(P1Bitmap), 16, 38);
@@ -278,7 +278,7 @@ namespace WpfProject
                 switch (sectionType)
                 {
                     case SectionTypes.StartGrid:
-                        switch (compas)
+                        switch (Compas)
                         {
                             case Compas.N:
                                 g.DrawImage(RotateBitmap(P2Bitmap), 63, 79);
@@ -295,7 +295,7 @@ namespace WpfProject
                         }
                         break;  
                     case SectionTypes.LeftCorner:
-                        switch (compas)
+                        switch (Compas)
                         {
                             case Compas.N:
                                 g.DrawImage(RotateBitmap(P2Bitmap), 70, 20);
@@ -312,7 +312,7 @@ namespace WpfProject
                         }
                         break;  
                     case SectionTypes.RightCorner:
-                        switch (compas)
+                        switch (Compas)
                         {
                             case Compas.N:
                                 g.DrawImage(RotateBitmap(P2Bitmap), 70, 70);
@@ -329,7 +329,7 @@ namespace WpfProject
                         }
                         break;  
                     case SectionTypes.Straight:
-                        switch (compas)
+                        switch (Compas)
                         {
                             case Compas.N:
                                 g.DrawImage(RotateBitmap(P2Bitmap), 66, 38);
@@ -346,7 +346,7 @@ namespace WpfProject
                         }
                         break;  
                     case SectionTypes.Finish:
-                        switch (compas)
+                        switch (Compas)
                         {
                             case Compas.N:
                                 g.DrawImage(RotateBitmap(P2Bitmap), 66, 38);
@@ -424,15 +424,15 @@ namespace WpfProject
         public static void ChangeCurserPos()
         {
             Bitmap sizeCheck = ImagesCache.GetImageBitmap(_straight);
-            if (DirGoing != Direction.Straight)
+            if (CornerDirGoing != Direction.Straight)
             {
-                ChangeCurserPosCorner(DirGoing);
-                compas = ChangeDirection(DirGoing, compas);
-                DirGoing = Direction.Straight;
+                ChangeCurserPosCorner(CornerDirGoing);
+                Compas = ChangeDirection(CornerDirGoing, Compas);
+                CornerDirGoing = Direction.Straight;
             }
             else
             {
-                switch (compas)
+                switch (Compas)
                 {
                     case Compas.N:
                         CurserPosY -= sizeCheck.Width;
@@ -457,7 +457,7 @@ namespace WpfProject
             switch (dirGoing)
             {
                 case Direction.Left:
-                    switch (compas)
+                    switch (Compas)
                     {
                         case Compas.N:
                             CurserPosX -= sizeCheck.Width; break;
@@ -470,7 +470,7 @@ namespace WpfProject
                     }
                     break;
                 case Direction.Right:
-                    switch (compas)
+                    switch (Compas)
                     {
                         case Compas.N:
                             CurserPosX += sizeCheck.Width; break;

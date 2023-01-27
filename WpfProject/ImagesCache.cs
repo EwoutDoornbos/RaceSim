@@ -29,7 +29,7 @@ namespace WpfProject
             Bitmap bitmap;
             try
             {
-                bitmap = (Bitmap)imagesCache[URL];
+                bitmap = imagesCache[URL];
                 lock (new object())
                 {
                     bitmapClone = (Bitmap)bitmap.Clone();

@@ -9,27 +9,27 @@ namespace Controller
 {
     public static class Data
     {
-        public static Competition competition;
+        public static Competition CurrentCompetition;
         public static Race? CurrentRace;
 
         public static void Initialize()
         {
-            competition = new Competition();
+            CurrentCompetition = new Competition();
             AddParticipants();
             AddTracks();
             NextRace();
         }
         public static void AddParticipants()
         {
-            competition.Participants.Add(new Driver("Hamilton", 0, new car(10, 10, 10), TeamColors.Blue));
-            competition.Participants.Add(new Driver("Verstappen", 0, new car(100, 10, 10), TeamColors.Red));
-            competition.Participants.Add(new Driver("Bottas", 0, new car(10, 10, 10), TeamColors.Yellow));
-            competition.Participants.Add(new Driver("Magnussen", 0, new car(10, 10, 10), TeamColors.Green));
-            competition.Participants.Add(new Driver("Schumacher", 0, new car(10, 10, 10), TeamColors.Grey));
+            CurrentCompetition.Participants.Add(new Driver("Hamilton", 0, new car(10, 10, 10), TeamColors.Blue));
+            CurrentCompetition.Participants.Add(new Driver("Verstappen", 0, new car(100, 10, 10), TeamColors.Red));
+            CurrentCompetition.Participants.Add(new Driver("Bottas", 0, new car(10, 10, 10), TeamColors.Yellow));
+            CurrentCompetition.Participants.Add(new Driver("Magnussen", 0, new car(10, 10, 10), TeamColors.Green));
+            CurrentCompetition.Participants.Add(new Driver("Schumacher", 0, new car(10, 10, 10), TeamColors.Grey));
         }
         public static void AddTracks()
         {
-            competition.Tracks.Enqueue(new Track("Monaco", new[]
+            CurrentCompetition.Tracks.Enqueue(new Track("Monaco", new[]
             {
                 SectionTypes.StartGrid,
                 SectionTypes.StartGrid,
@@ -75,7 +75,7 @@ namespace Controller
                 SectionTypes.RightCorner,
                 SectionTypes.Straight*/
             }, 2));
-            competition.Tracks.Enqueue(new Track("Zandvoord", new[]
+            CurrentCompetition.Tracks.Enqueue(new Track("Zandvoord", new[]
             {
                 SectionTypes.StartGrid,
                 SectionTypes.StartGrid,
@@ -101,10 +101,10 @@ namespace Controller
         }
         public static void NextRace()
         {
-            Track NextTrack = competition.NextTrack();
+            Track NextTrack = CurrentCompetition.NextTrack();
             if(NextTrack != null)
             {
-                CurrentRace = new Race(NextTrack, competition.Participants);
+                CurrentRace = new Race(NextTrack, CurrentCompetition.Participants);
             }
             else
             {

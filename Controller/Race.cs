@@ -15,9 +15,9 @@ namespace Controller
         public DateTime StartTime;
         private Random _random;
         private Dictionary<Section, SectionData> _positions;
-        private Dictionary<IParticipant, int> _FinishedParticipants;
+        private Dictionary<IParticipant, int> _finishedParticipants;
 
-        public Dictionary<IParticipant, int>? _LapCount { get; private set; }
+        public Dictionary<IParticipant, int>? _lapCount { get; private set; }
 
         public event EventHandler<DriversChangedEventArgs> DriversChanged;
 
@@ -52,12 +52,12 @@ namespace Controller
             Track = track;
             Laps = track.Laps;
             Participants = participants;
-            _FinishedParticipants = new Dictionary<IParticipant, int>();
+            _finishedParticipants = new Dictionary<IParticipant, int>();
 
-            _LapCount = new Dictionary<IParticipant, int>();
+            _lapCount = new Dictionary<IParticipant, int>();
             foreach (IParticipant p in Participants)
             {
-                _LapCount[p] = 0;
+                _lapCount[p] = 0;
             }
 
             _random = new Random(DateTime.Now.Millisecond);
@@ -237,12 +237,12 @@ namespace Controller
         {
             try
             {
-                _LapCount[participant]++;
-                if (_LapCount[participant] > Laps)
+                _lapCount[participant]++;
+                if (_lapCount[participant] > Laps)
                 {
-                    _LapCount.Remove(participant);
-                    int FinishPosition = _FinishedParticipants.Count;
-                    _FinishedParticipants.Add(participant, FinishPosition + 1);
+                    _lapCount.Remove(participant);
+                    int FinishPosition = _finishedParticipants.Count;
+                    _finishedParticipants.Add(participant, FinishPosition + 1);
                     AddParticipantPoints(participant, FinishPosition);
                     RemoveParticipant(participant, GetSectionData(NextSection));
                 }
@@ -251,12 +251,12 @@ namespace Controller
             {
                 try
                 {
-                    _LapCount.Add(participant, 0);
+                    _lapCount.Add(participant, 0);
                 }
                 catch (System.ArgumentException)
                 {
-                    _LapCount[participant]++;
-                    if (_LapCount[participant] >= Laps)
+                    _lapCount[participant]++;
+                    if (_lapCount[participant] >= Laps)
                     {
                         RemoveParticipant(participant, GetSectionData(NextSection));
                     }
@@ -315,8 +315,8 @@ namespace Controller
         }
         public Dictionary<IParticipant, int> GetParticipantPositions()
         {
-            Dictionary<IParticipant, int> positions = new Dictionary<IParticipant, int>(_FinishedParticipants);
-            int MaxLapCount = _LapCount.Values.Max();                                           //Max LapCount to check who is in first
+            Dictionary<IParticipant, int> positions = new Dictionary<IParticipant, int>(_finishedParticipants);
+            int MaxLapCount = _lapCount.Values.Max();                                           //Max LapCount to check who is in first
             Stack<SectionData> sectionDataStack = new Stack<SectionData>();                     //Convert LinkedList into Stack
             foreach (Section s in Track.Sections)
             {
@@ -336,7 +336,7 @@ namespace Controller
                 {
                     if(s.Left != null)
                     {
-                        if (_LapCount[s.Left] == MaxLapCount)
+                        if (_lapCount[s.Left] == MaxLapCount)
                         {
                             positions.Add(s.Left, NextPosition);
                             NextPosition++;
@@ -344,7 +344,7 @@ namespace Controller
                     }
                     if(s.Right != null)
                     {
-                        if (_LapCount[s.Right] == MaxLapCount)
+                        if (_lapCount[s.Right] == MaxLapCount)
                         {
                             positions.Add(s.Right, NextPosition);
                             NextPosition++;
@@ -359,7 +359,7 @@ namespace Controller
 
         public void CleanUp()
         {
-            _LapCount = null;
+            _lapCount = null;
             DriversChanged = null;
             _timer.Stop();        }
     }

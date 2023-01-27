@@ -14,7 +14,7 @@ namespace WpfProject
         public event PropertyChangedEventHandler PropertyChanged;
 
         public IEnumerable<IParticipant> ParticipantPoints  => Data.CurrentRace.Participants.OrderByDescending(x => x.Points).ToList();
-        public IEnumerable<Track> TracksList => Data.competition.Tracks.ToList();
+        public IEnumerable<Track> TracksList => Data.CurrentCompetition.Tracks.ToList();
 
         public CompititionDataContext()
         {

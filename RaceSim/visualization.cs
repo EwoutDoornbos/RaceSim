@@ -15,8 +15,8 @@ namespace RaceSim
         private static int CurserPosX;
         private static int CurserPosY;
 
-        private static Compas compas;
-        private static Direction DirGoing;
+        private static Compas DirectionCompas;
+        private static Direction CornerDirGoing;
 
         #region graphics 
 
@@ -43,8 +43,8 @@ namespace RaceSim
         #endregion
         public static void Initialize()
         {
-            compas = Compas.E;
-            DirGoing = Direction.Straight;
+            DirectionCompas = Compas.E;
+            CornerDirGoing = Direction.Straight;
             Data.CurrentRace.DriversChanged += OnDriversChanged;
             Race.NextRaceEvent += OnNextRace;
         }
@@ -68,9 +68,9 @@ namespace RaceSim
         }
         public static int GetLapCount(Race race)
         {
-            if (race._LapCount.Count != 0)
+            if (race._lapCount.Count != 0)
             {
-                return race._LapCount.Max(x => x.Value)+1;
+                return race._lapCount.Max(x => x.Value);
             }
             else
             {
@@ -90,11 +90,11 @@ namespace RaceSim
                     return SectionTypeToDirectionalSectionType(_straightVertical, _straightHorizontal, _straightVertical, _straightHorizontal);
                 case SectionTypes.LeftCorner:
                     string[] tempL = SectionTypeToDirectionalSectionType(_cornerLeftN, _cornerLeftE, _cornerLeftS, _cornerLeftW);
-                    DirGoing = Direction.Left;
+                    CornerDirGoing = Direction.Left;
                     return tempL;
                 case SectionTypes.RightCorner:
                     string[] tempR = SectionTypeToDirectionalSectionType(_cornerRightN, _cornerRightE, _cornerRightS, _cornerRightW);
-                    DirGoing = Direction.Right;
+                    CornerDirGoing = Direction.Right;
                     return tempR;
                 case SectionTypes.StartGrid:
                     return SectionTypeToDirectionalSectionType(_startVertical, _startHorizontal, _startVertical, _startHorizontal);
@@ -106,7 +106,7 @@ namespace RaceSim
         }
         public static string[] SectionTypeToDirectionalSectionType(string[] sectionN, string[] sectionE, string[] sectionS, string[] sectionW)
         {
-            switch (compas)
+            switch (DirectionCompas)
             {
                 case Compas.N:
                     return sectionN;
@@ -117,7 +117,7 @@ namespace RaceSim
                 case Compas.W:
                     return sectionW;
                 default:
-                    throw new ArgumentOutOfRangeException(nameof(compas), compas, null);
+                    throw new ArgumentOutOfRangeException(nameof(DirectionCompas), DirectionCompas, null);
             };
         }
         public static void ConsoleWriteSection(string[] sectionString, Section section)
@@ -136,44 +136,65 @@ namespace RaceSim
         }
         public static string DrawParticipants(string s, IParticipant P1, IParticipant P2, Boolean isFinish)
         {
+            //Check if participant is broken
+            string P1String = GetParticipantString(P1);
+            string P2String = GetParticipantString(P2);
+
             //Replace the placeholders for the participants
             if (isFinish)
             {
-                return s.Replace("1", P1?.Name?.Substring(0, 1) ?? "▀").Replace("2", P2?.Name?.Substring(0, 1) ?? "▀");
+                return s.Replace("1", P1String ?? "▀").Replace("2", P2String ?? "▀");
             }
             else
             {
-                return s.Replace("1", P1?.Name?.Substring(0, 1) ?? " ").Replace("2", P2?.Name?.Substring(0, 1) ?? " ");
+                return s.Replace("1", P1String ?? " ").Replace("2", P2String ?? " ");
             }
+        }
+        public static string GetParticipantString(IParticipant participant)
+        {
+            string s = null;
+            if (participant is IParticipant P)
+            {
+
+                if (!P.Equipement.IsBroken)
+                {
+                    s = P.Name.Substring(0, 1);
+                }
+                else
+                {
+                    s = "x";
+                }
+            }
+            return s;
         }
         public static void ChangeDirection(Direction direction)
         {
             switch (direction)
             {
                 case Direction.Left:
-                    switch (compas)
+                    switch (DirectionCompas)
                     {
                         case Compas.N:
-                            compas = Compas.W;
+                            DirectionCompas = Compas.W;
                             break;
                         case Compas.E:
                         case Compas.S:
                         case Compas.W:
-                            compas--;
+                            DirectionCompas--;
                             break;
 
                     }
                     break;
                 case Direction.Right:
-                    switch (compas)
+                    switch (DirectionCompas)
                     {
                         case Compas.N:
                         case Compas.E:
                         case Compas.S:
-                            compas++;
+                            DirectionCompas++;
                             break;
                         case Compas.W:
-                            compas = Compas.N;
+                            DirectionCompas = Compas.N;
                             break;
                     }
                     break;
@@ -182,15 +203,15 @@ namespace RaceSim
         }
         public static void ChangeCurserPos()
         {
-            if (DirGoing != Direction.Straight)
+            if (CornerDirGoing != Direction.Straight)
             {
-                ChangeCurserPosCorner(DirGoing);
-                ChangeDirection(DirGoing);
-                DirGoing = Direction.Straight;
+                ChangeCurserPosCorner(CornerDirGoing);
+                ChangeDirection(CornerDirGoing);
+                CornerDirGoing = Direction.Straight;
             }
             else
             {
-                switch (compas)
+                switch (DirectionCompas)
                 {
                     case Compas.N:
                         CurserPosY -= _straightHorizontal.Length;
@@ -215,7 +236,7 @@ namespace RaceSim
             switch (dirGoing)
             {
                 case Direction.Left:
-                    switch (compas)
+                    switch (DirectionCompas)
                     {
                         case Compas.N:
                             CurserPosX -= _straightHorizontal.Length; break;
@@ -228,7 +249,7 @@ namespace RaceSim
                     }
                     break;
                 case Direction.Right:
-                    switch (compas)
+                    switch (DirectionCompas)
                     {
                         case Compas.N:
                             CurserPosX += _straightHorizontal.Length; break;

@@ -23,7 +23,7 @@ namespace ControllerTest
             Data.Initialize();
 
             // Act
-            var result = Data.competition;
+            var result = Data.CurrentCompetition;
 
             // Assert
             Assert.IsNotNull(result);
@@ -38,8 +38,8 @@ namespace ControllerTest
             Data.Initialize();
 
             // Assert
-            Assert.True(Data.competition.Participants.Count > 0);
-            Assert.True(Data.competition.Tracks.Count > 0);
+            Assert.True(Data.CurrentCompetition.Participants.Count > 0);
+            Assert.True(Data.CurrentCompetition.Tracks.Count > 0);
         }
 
         [Test]
